@@ -1,0 +1,632 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
+    
+    
+      
+        <title>MVC - Arquitecturas de apps iOS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.24c991ad.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#009485">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#los-problemas-de-mvc" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-header__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arquitecturas de apps iOS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MVC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-nav__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    Arquitecturas de apps iOS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Arquitecturas de aplicaciones en iOS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Arquitecturas de aplicaciones en iOS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Arquitecturas de aplicaciones en iOS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_intro_arquitecturas/" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          MVC
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        MVC
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#los-problemas-de-mvc" class="md-nav__link">
+    Los problemas de MVC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controladores-ligeros" class="md-nav__link">
+    Controladores "ligeros"
+  </a>
+  
+    <nav class="md-nav" aria-label="Controladores "ligeros"">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#separacion-de-los-datasourcesdelegates" class="md-nav__link">
+    Separación de los datasources/delegates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extraer-el-codigo-de-configuracion-de-la-celda" class="md-nav__link">
+    Extraer el código de configuración de la celda
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_MVP/" class="md-nav__link">
+        MVP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_MVVM/" class="md-nav__link">
+        MVVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_VIPER/" class="md-nav__link">
+        VIPER
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_ejercicios/" class="md-nav__link">
+        Ejercicios. App con MVVM
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#los-problemas-de-mvc" class="md-nav__link">
+    Los problemas de MVC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controladores-ligeros" class="md-nav__link">
+    Controladores "ligeros"
+  </a>
+  
+    <nav class="md-nav" aria-label="Controladores "ligeros"">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#separacion-de-los-datasourcesdelegates" class="md-nav__link">
+    Separación de los datasources/delegates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extraer-el-codigo-de-configuracion-de-la-celda" class="md-nav__link">
+    Extraer el código de configuración de la celda
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>MVC</h1>
+                
+                <h2 id="los-problemas-de-mvc">Los problemas de MVC<a class="headerlink" href="#los-problemas-de-mvc" title="Permanent link">&para;</a></h2>
+<p>En teoría la estructura de una aplicación iOS con MVC debería ser sencilla y "limpia", ya que cada uno de los tres componentes tiene una responsabilidad separada. </p>
+<p><img alt="" src="../img/expectativa_mvc.png" /></p>
+<p>En la práctica, la principal fuente de problemas de esta arquitectura es el <em>controlador</em>. Por un lado, el <code>UIViewController</code> está tan <strong>unido a la vista</strong> que acaba siendo parte de ella en lugar de un componente separado. En la realidad la arquitectura de muchas aplicaciones iOS acaba pareciéndose más a la siguiente figura que a la anterior:</p>
+<p><img alt="" src="../img/realidad_mvc.png" /></p>
+<p>Al estar tan acoplado el controlador a la vista se hace casi imposible hacer <em>testing</em> del controlador en sí, sin probar la interfaz de usuario, ya que tendríamos que hacer un <em>mock</em> de todos los componentes de la vista que interactúan con el controlador.</p>
+<p>Por otro lado es fácil "dejarse llevar" y acabar asignándole <strong>demasiadas responsabilidades</strong> al controlador: colocar en él lógica de negocio, hacer que sea el <em>datasource</em> o el <em>delegate</em> de las tablas que contiene,... Esto da lugar a lo que de modo irónico se conoce como <em>massive view controller</em>.</p>
+<blockquote>
+<p>Casi todos los tutoriales y ejemplos sobre <em>frameworks</em> o APIs de iOS que encontraréis en la web o en los libros tienen este problema, incluyendo muchas veces el material que os damos en este curso. Como el objetivo del tutorial o del ejemplo es aprender sobre el <em>framework</em>/API que no conoces, se tiende a poner todo el código en el <em>view controller</em>, evitando crear clases adicionales que añadirían complejidad al ejemplo y distraerían del objetivo principal. Pero por desgracia el resultado final es un <em>Massive View Controller</em>.</p>
+</blockquote>
+<p>Para solucionar todos estos problemas podemos usar una arquitectura distinta a MVC, como veremos en apartados posteriores. Pero no todo son problemas en MVC tal como lo propone Apple: tiene la ventaja de estar especialmente adaptado a la filosofía de la plataforma, los <em>frameworks</em> y los APIs de iOS, y además es una arquitectura sencilla. Una alternativa sería continuar usándolo pero intentar "aligerar" el controlador en la medida de lo posible para hacer el código más mantenible. Vamos a ver cómo podríamos hacerlo.</p>
+<h2 id="controladores-ligeros">Controladores "ligeros"<a class="headerlink" href="#controladores-ligeros" title="Permanent link">&para;</a></h2>
+<p>Básicamente la idea es dejar en el controlador el mínimo de código imprescindible para coordinarse con el modelo y con la vista, que es la que debería ser su única labor. Esto no es más que una aplicación del "Principio de responsabilidad única" (Single Responsibility Principe), un principio básico en el diseño y desarrollo de software que sostiene que <em>cada componente debería tener una única responsabilidad o funcionalidad en el sistema</em>. Esto no solo mejora la estructura del código, sino que también facilita el testing y mejora la mantenibilidad de la aplicación.</p>
+<p>Si "nos dejamos llevar" y colocamos todo el código de la aplicación en el <em>view controller</em>, al final puede acabar teniendo las siguientes responsabilidades:</p>
+<ul>
+<li>Almacenar temporalmente y modificar los datos de la aplicación</li>
+<li>Implementar al menos parte de la lógica de negocio, que debería estar únicamente en las clases del modelo</li>
+<li>Implementar la persistencia de datos. Si además usamos Core Data y necesitamos listar datos con un <em>fetched results controller</em>, el <em>view controller</em> acaba teniendo que convertirse en su <em>delegate</em>.</li>
+<li>En caso de tener una tabla:<ul>
+<li>Típicamente es <em>datasource</em> y <em>delegate</em> de la misma</li>
+<li>Al ser el <em>datasource</em>, se tiene que encargar de rellenar todos los datos de cada celda, por lo que tiene que conocer su estructura</li>
+</ul>
+</li>
+<li>El <em>view controller</em> acaba convirtiéndose la mayoría de veces en el <em>delegate</em> de los componentes de interfaz que requieren uno, por ejemplo los <em>sliders</em> o los <em>datepickers</em>.</li>
+<li>Muchas veces cuando de un <em>view controller</em> se salta a otro este le pasa los datos fijando propiedades en el <em>view controller</em> destino. Eso implica un conocimiento de la estructura interna de este <em>controller</em>.</li>
+</ul>
+<p>Básicamente la solución es relativamente de "sentido común" y consiste en extraer todas estas funcionalidades a clases/<em>structs</em> adicionales. Vamos a ver algunas ideas genéricas de cómo se podrían hacer estas refactorizaciones.</p>
+<h3 id="separacion-de-los-datasourcesdelegates">Separación de los <em>datasources</em>/<em>delegates</em><a class="headerlink" href="#separacion-de-los-datasourcesdelegates" title="Permanent link">&para;</a></h3>
+<p>Vamos a ver cómo se podría extraer el <em>datasource</em> de una tabla. Un <em>delegate</em> sería similar. Intentaremos hacer una clase genérica que nos pueda servir en varios proyectos. Dicha clase:</p>
+<ul>
+<li>Por supuesto implementa los métodos del protocolo <code>UITableViewDataSource</code></li>
+<li>Contiene un array con los objetos a mostrar, ya que es la forma más sencilla de representar los datos.</li>
+<li>Acepta en el constructor una clausura que se encarga de rellenar los campos de una celda a partir de un objeto</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">import</span> <span class="nc">Foundation</span>
+<span class="kd">import</span> <span class="nc">UIKit</span>
+
+<span class="kd">class</span> <span class="nc">ListaItemsDataSource</span><span class="p">&lt;</span><span class="n">Item</span><span class="p">&gt;</span> <span class="p">:</span> <span class="bp">NSObject</span><span class="p">,</span> <span class="bp">UITableViewDataSource</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">items</span> <span class="p">:</span> <span class="p">[</span><span class="n">Item</span><span class="p">]</span>
+    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">idCelda</span> <span class="p">:</span> <span class="nb">String</span>
+    <span class="kd">private</span> <span class="kd">var</span> <span class="nv">configurarCelda</span> <span class="p">:</span> <span class="p">(</span><span class="bp">UITableViewCell</span><span class="p">,</span> <span class="n">Item</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span>
+
+    <span class="kd">init</span><span class="p">(</span><span class="n">listaItems</span><span class="p">:</span> <span class="p">[</span><span class="n">Item</span><span class="p">],</span> <span class="n">idCelda</span> <span class="p">:</span> <span class="nb">String</span><span class="p">,</span> <span class="n">configurarCelda</span> <span class="p">:</span> <span class="p">@</span><span class="n">escaping</span> <span class="p">(</span><span class="bp">UITableViewCell</span><span class="p">,</span> <span class="n">Item</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Void</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">items</span> <span class="p">=</span> <span class="n">listaItems</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">idCelda</span> <span class="p">=</span> <span class="n">idCelda</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">configurarCelda</span> <span class="p">=</span> <span class="n">configurarCelda</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">numberOfRowsInSection</span> <span class="n">section</span><span class="p">:</span> <span class="nb">Int</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">items</span><span class="p">.</span><span class="bp">count</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">tableView</span><span class="p">(</span><span class="kc">_</span> <span class="n">tableView</span><span class="p">:</span> <span class="bp">UITableView</span><span class="p">,</span> <span class="n">cellForRowAt</span> <span class="n">indexPath</span><span class="p">:</span> <span class="n">IndexPath</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="bp">UITableViewCell</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nv">cell</span> <span class="p">=</span> <span class="n">tableView</span><span class="p">.</span><span class="n">dequeueReusableCell</span><span class="p">(</span><span class="n">withIdentifier</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">idCelda</span><span class="p">,</span> <span class="k">for</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">configurarCelda</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="kc">self</span><span class="p">.</span><span class="n">items</span><span class="p">[</span><span class="n">indexPath</span><span class="p">.</span><span class="n">row</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">cell</span>
+    <span class="p">}</span>   
+<span class="p">}</span>
+</code></pre></div>
+<p>Y aquí tenemos un <em>view controller</em> de ejemplo que hace uso de esta clase. Por ejemplo supongamos que queremos mostrar una lista de objetos <code>Persona</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">MiController</span><span class="p">:</span> <span class="bp">UIViewController</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">miDataSource</span> <span class="p">:</span> <span class="n">ListaItemsDataSource</span><span class="p">&lt;</span><span class="n">Usuario</span><span class="p">&gt;</span><span class="o">!</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+        <span class="c1">//Tendríamos que obtener los datos de algún sitio, p.ej. de Core Data</span>
+        <span class="kd">let</span> <span class="nv">lista</span> <span class="p">=</span> <span class="p">...</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">miDataSource</span> <span class="p">=</span> <span class="n">ListaItemsDataSource</span><span class="p">&lt;</span><span class="n">Usuario</span><span class="p">&gt;(</span><span class="n">listaItems</span><span class="p">:</span> <span class="n">lista</span><span class="p">,</span> <span class="n">idCelda</span><span class="p">:</span> <span class="s">&quot;MiCelda&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">celda</span><span class="p">,</span><span class="n">persona</span> <span class="k">in</span>
+              <span class="n">celda</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">persona</span><span class="p">.</span><span class="n">nombre</span>
+              <span class="kd">let</span> <span class="nv">df</span> <span class="p">=</span> <span class="n">DateFormatter</span><span class="p">()</span>
+              <span class="n">df</span><span class="p">.</span><span class="n">dateFormat</span> <span class="p">=</span> <span class="s">&quot;dd/MM/yyyy&quot;</span>
+              <span class="kd">let</span> <span class="nv">fechaString</span> <span class="p">=</span> <span class="n">df</span><span class="p">.</span><span class="n">string</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="n">persona</span><span class="p">.</span><span class="n">fechaNacimiento</span><span class="p">)</span>
+              <span class="n">celda</span><span class="p">.</span><span class="n">detailTextLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">fechaString</span>
+        <span class="p">}</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">dataSource</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">miDataSource</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="extraer-el-codigo-de-configuracion-de-la-celda">Extraer el código de configuración de la celda<a class="headerlink" href="#extraer-el-codigo-de-configuracion-de-la-celda" title="Permanent link">&para;</a></h3>
+<p>En el código anterior el View Controller sigue teniendo que ocuparse de rellenar los campos de la celda, lo que hace que tenga que conocer su estructura: en el ejemplo, que la celda tiene un <code>textLabel</code> y un <code>detailTextLabel</code> y también que tenga que ocuparse de formatear los datos, por ejemplo la fecha.</p>
+<p>Podemos encapsular la información sobre la "estructura interna" de la celda en una nueva clase, que en MVC pertenecería a la vista. </p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">CeldaPersona</span> <span class="p">:</span> <span class="bp">UITableViewCell</span> <span class="p">{</span>
+    <span class="kd">static</span> <span class="kd">let</span> <span class="nv">idCelda</span> <span class="p">=</span> <span class="s">&quot;MiCelda&quot;</span>
+    <span class="kd">var</span> <span class="nv">nombre</span> <span class="p">:</span> <span class="nb">String</span><span class="p">?</span> <span class="p">{</span>
+        <span class="kr">didSet</span> <span class="p">{</span>
+            <span class="kc">self</span><span class="p">.</span><span class="n">textLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">nombre</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nv">fecha</span> <span class="p">:</span> <span class="n">Date</span><span class="p">?</span> <span class="p">{</span>
+        <span class="kr">didSet</span> <span class="p">{</span>
+            <span class="kd">let</span> <span class="nv">df</span> <span class="p">=</span> <span class="n">DateFormatter</span><span class="p">()</span>
+            <span class="n">df</span><span class="p">.</span><span class="n">dateStyle</span> <span class="p">=</span> <span class="p">.</span><span class="n">short</span>
+            <span class="kc">self</span><span class="p">.</span><span class="n">detailTextLabel</span><span class="p">?.</span><span class="n">text</span> <span class="p">=</span> <span class="n">df</span><span class="p">.</span><span class="n">string</span><span class="p">(</span><span class="n">from</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">fecha</span><span class="p">!)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nótese que ahora "desde fuera" para configurar la celda lo único que hay que hacer es fijar el valor de las propiedades "texto" y "fecha". Los <code>didSet</code> se encargarán automáticamente de rellenar los campos de la celda con el formato adecuado.</p>
+<p>De este modo el <em>view controller</em> quedaría aún más sencillo</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">MiController</span><span class="p">:</span> <span class="bp">UIViewController</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nv">miDataSource</span> <span class="p">:</span> <span class="n">ListaItemsDataSource</span><span class="p">&lt;</span><span class="n">Usuario</span><span class="p">&gt;</span><span class="o">!</span>
+
+    <span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+
+        <span class="c1">//Tendríamos que obtener los datos de algún sitio, p.ej. de Core Data</span>
+        <span class="kd">let</span> <span class="nv">lista</span> <span class="p">=</span> <span class="p">...</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">miDataSource</span> <span class="p">=</span> <span class="n">ListaItemsDataSource</span><span class="p">&lt;</span><span class="n">Usuario</span><span class="p">&gt;(</span><span class="n">listaItems</span><span class="p">:</span> <span class="n">lista</span><span class="p">,</span> <span class="n">idCelda</span><span class="p">:</span> <span class="s">&quot;MiCelda&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">celda</span><span class="p">,</span><span class="n">persona</span> <span class="k">in</span>
+              <span class="k">if</span> <span class="kd">let</span> <span class="nv">celdaPersona</span> <span class="p">=</span> <span class="n">celda</span> <span class="k">as</span><span class="p">?</span> <span class="n">CeldaPersona</span> <span class="p">{</span>
+                <span class="n">celdaPersona</span><span class="p">.</span><span class="n">nombre</span> <span class="p">=</span> <span class="n">persona</span><span class="p">.</span><span class="n">nombre</span>
+                <span class="n">celdaPersona</span><span class="p">.</span><span class="n">fecha</span> <span class="p">=</span> <span class="n">persona</span><span class="p">.</span><span class="n">fechaNacimiento</span>
+              <span class="p">}</span> 
+        <span class="p">}</span>
+        <span class="kc">self</span><span class="p">.</span><span class="n">tableView</span><span class="p">.</span><span class="n">dataSource</span> <span class="p">=</span> <span class="kc">self</span><span class="p">.</span><span class="n">miDataSource</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Para que el <em>cast</em> de <code>celda as CeldaPersona</code> pueda tener éxito, en Xcode habrá que seleccionar la celda prototipo en el <em>storyboard</em> y cambiar en el "identity inspector" del panel derecho la clase de la celda por <code>CeldaPersona</code>.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../1_intro_arquitecturas/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Introducción" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              Introducción
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../3_MVP/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: MVP" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              MVP
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.bc35569b.min.js"></script>
+      
+    
+  </body>
+</html>

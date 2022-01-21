@@ -1,0 +1,515 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
+    
+    
+      
+        <title>VIPER - Arquitecturas de apps iOS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.24c991ad.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#009485">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#componentes-de-la-arquitectura" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-header__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arquitecturas de apps iOS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              VIPER
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-nav__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    Arquitecturas de apps iOS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Arquitecturas de aplicaciones en iOS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Arquitecturas de aplicaciones en iOS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Arquitecturas de aplicaciones en iOS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_intro_arquitecturas/" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_MVC/" class="md-nav__link">
+        MVC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_MVP/" class="md-nav__link">
+        MVP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_MVVM/" class="md-nav__link">
+        MVVM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          VIPER
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        VIPER
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-de-la-arquitectura" class="md-nav__link">
+    Componentes de la arquitectura
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-basicos-de-viper" class="md-nav__link">
+    Principios básicos de VIPER
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-e-inconvenientes" class="md-nav__link">
+    Ventajas e inconvenientes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_ejercicios/" class="md-nav__link">
+        Ejercicios. App con MVVM
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-de-la-arquitectura" class="md-nav__link">
+    Componentes de la arquitectura
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-basicos-de-viper" class="md-nav__link">
+    Principios básicos de VIPER
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-e-inconvenientes" class="md-nav__link">
+    Ventajas e inconvenientes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>VIPER</h1>
+                
+                <p>MVP y MVVM son un paso más en la separación de responsabilidades en los componentes de la aplicación, pero no dejan claro cómo estructurar el modelo. Además algunas cosas quedan fuera de la arquitectura, como es el caso del cambio de pantallas en la aplicación: típicamente habrá un MVVM por cada pantalla, pero ¿quién decide a dónde ir saltando y cómo hacerlo?.</p>
+<p>VIPER (View/Interactor/Presenter/Entity/Router) es una arquitectura que intenta solucionar o al menos abordar estos problemas.</p>
+<p>VIPER es una adaptación a iOS de la <em>Clean Architecture</em> propuesta por el "gurú" de la ingeniería del software <a href="http://blog.cleancoder.com/">Robert C. Martin</a>, conocido familiarmente como "Uncle Bob". El <em>tío Bob</em> ha explicado los detalles de su <em>clean architecture</em> en múltiples ocasiones, por ejemplo en <a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html">su blog</a> y en <a href="https://www.youtube.com/watch?v=Nsjsiz2A9mg">algunas charlas</a>. VIPER aparece descrito por primera vez en <a href="https://www.objc.io/issues/13-architecture/viper/">este artículo</a> de 2014.</p>
+<p>Igual que sucedía con los "controladores ligeros" en MVC, una de las ideas básicas de la <em>Clean Architecture</em> y por tanto de VIPER es llevar a la práctica el "Principio de Única Responsabilidad".</p>
+<h2 id="componentes-de-la-arquitectura">Componentes de la arquitectura<a class="headerlink" href="#componentes-de-la-arquitectura" title="Permanent link">&para;</a></h2>
+<p>Como hemos enumerado antes, los componentes son los siguientes:</p>
+<ul>
+<li><em>View</em>: muestra los datos que le pasa el <em>presenter</em>, y le pasa a este las acciones del usuario. Como vemos es el mismo papel que desempeña en MVP o MVVM.</li>
+<li><em>Interactor</em>: es la lógica de negocio, los casos de uso de nuestra aplicación. Típicamente cada módulo VIPER implementará un caso de uso distinto.</li>
+<li><em>Presenter</em>: contiene la lógica de presentación, al igual que en MVP.</li>
+<li><em>Entity</em>: los modelos del dominio. Se podría decir que contienen la lógica de negocio "genérica" mientras que el <em>interactor</em> contiene la lógica propia de nuestra aplicación.</li>
+<li><em>Router</em>: contiene la lógica de navegación, para saber qué pantallas mostrar y cómo cambiar entre ellas. En algunos sitios se conoce también como <em>wireframe</em></li>
+</ul>
+<p>Los componentes se comunican entre sí según se indica en el siguiente diagrama:</p>
+<p><img alt="" src="../img/viper.png" /></p>
+<h2 id="principios-basicos-de-viper">Principios básicos de VIPER<a class="headerlink" href="#principios-basicos-de-viper" title="Permanent link">&para;</a></h2>
+<p>Además de los componentes que lo forman y la forma de comunicarse entre ellos, hay unas cuantas ideas adicionales importantes en VIPER.</p>
+<p>La primera de ellas es que <strong>todos los componentes se comunican entre sí a través de protocolos</strong> (o interfaces, como diríamos en otros lenguajes). Esto hace posible sustituir una implementación de un componente por otra sin afectar al resto del componentes. Es decir, seguimos el principio básico del desarrollo software de <em>programar contra interfaces y no contra implementaciones</em>.</p>
+<p>En la <em>clean architecture</em> original se hablaba de dos tipos de interfaces: <em>input ports</em> y <em>output ports</em>, y en la mayoría de implementaciones de VIPER se ha conservado esta idea y terminología. Para un componente, su <em>input port</em> lo constituyen las operaciones que él implementa, y que serán llamadas desde otros componentes. El <em>output port</em> serán las operaciones que el componente necesita, implementadas por otro componente. Si tenemos dos componentes, A y B, y A necesita de B, el <em>output port</em> de A será el mismo protocolo o interfaz que el <em>input port</em> de B. </p>
+<p>La misión de estos <em>output ports</em> es conseguir lo que se llama <strong>inversión de dependencias</strong>. Veamos qué es esto. Si nos fijamos en el diagrama principal de VIPER veremos que conforme nos movemos de izquierda a derecha vamos yendo de lo más "concreto" y poco reutilizable a lo más "abstracto", reutilizable e independiente de los APIs de iOS. La vista está totalmente atada a <code>UIKit</code>, mientras que en el otro extremo el <code>Interactor</code> debería ser igual para cualquier plataforma, salvo por el hecho de estar escrito en Swift. Si pensamos en los componentes como capas (más internas conforme avanzamos hacia la derecha),  es adecuado que un componente de una capa dependa de los de las capas internas, pero no a la inversa, ya que estaríamos haciéndolo depender de "detalles de implementación" que están por debajo de su nivel de abstracción: un ejemplo: cuando el <em>interactor</em> termina su trabajo y debe devolver los datos al <em>presenter</em> tiene que llamarlo para pasárselos, pero para no introducir dependencias incorrectas debe hacerlo a través de un protocolo. Y además este protocolo debería implementarse en el "paquete" del <em>interactor</em>, para evitar dependencias directas de código de <em>interactor</em> a <em>presenter</em>. Este protocolo sería el <code>InteractorOutput</code>. Y esto se llama <em>inversión de dependencias</em> porque aunque el <em>interactor</em> llama al <em>presenter</em> en código no depende de él.</p>
+<p><img alt="" src="../img/dependency_inversion.png" /></p>
+<p>Otra idea importante es <strong>qué datos se pasan entre los componentes</strong>. Vamos a verlo con un ejemplo. Si estamos haciendo una aplicación de tareas pendientes probablemente tendremos una entidad llamada <code>Tarea</code>. Por ejemplo, cuando listamos las tareas pendientes las recuperará el <em>interactor</em> (quizá usando Core Data), que se las pasará al <em>presenter</em> (que formateará los datos adecuadamente, por ejemplo las fechas), y este a su vez a la <em>vista</em> para que las muestre en pantalla. Probablemente lo más directo sería pasar objetos <code>Tarea</code> de un componente a otro, pero esto tiene el problema de que estamos acoplándolos todos a la entidad, y si cambiamos esta tendremos que cambiar todos los componentes. Por eso en VIPER y en <em>clean architecture</em> se recomienda pasar solamente los datos que se necesiten y además en un formato <em>ad hoc</em>, típicamente <code>structs</code> o tuplas de datos. </p>
+<h2 id="ventajas-e-inconvenientes">Ventajas e inconvenientes<a class="headerlink" href="#ventajas-e-inconvenientes" title="Permanent link">&para;</a></h2>
+<p>Las ventajas de VIPER son las de cualquier arquitectura bien diseñada:</p>
+<ul>
+<li>Facilita la colaboración en el equipo de desarrollo, si cada desarrollador se ocupa de un componente separado o un conjunto de componentes.</li>
+<li>Facilita el mantenimiento de la aplicación.</li>
+<li>Hace posible el <em>testing</em>.</li>
+</ul>
+<p>Como inconveniente principal está la sobrecarga que supone crear un mínimo de 5 componentes por cada módulo. Es una arquitectura que para aplicaciones pequeñas o para aplicaciones implementadas por un solo desarrollador quizá presenta una complicación excesiva.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../4_MVVM/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: MVVM" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              MVVM
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../6_ejercicios/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Ejercicios. App con MVVM" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              Ejercicios. App con MVVM
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.bc35569b.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,614 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
+    
+    
+      
+        <title>MVVM - Arquitecturas de apps iOS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.24c991ad.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#009485">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mvvm-vs-mvp" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-header__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arquitecturas de apps iOS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MVVM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Limpiar" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-nav__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    Arquitecturas de apps iOS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          Arquitecturas de aplicaciones en iOS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Arquitecturas de aplicaciones en iOS" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          Arquitecturas de aplicaciones en iOS
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_intro_arquitecturas/" class="md-nav__link">
+        Introducción
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_MVC/" class="md-nav__link">
+        MVC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_MVP/" class="md-nav__link">
+        MVP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          MVVM
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        MVVM
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mvvm-vs-mvp" class="md-nav__link">
+    MVVM vs. MVP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvvm-con-combine" class="md-nav__link">
+    MVVM con Combine
+  </a>
+  
+    <nav class="md-nav" aria-label="MVVM con Combine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vinculacion-entre-viewmodel-y-vista" class="md-nav__link">
+    Vinculación entre viewmodel y vista
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensamblaje-de-modelo-viewmodel-y-vista" class="md-nav__link">
+    "Ensamblaje" de modelo, viewmodel y vista
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_VIPER/" class="md-nav__link">
+        VIPER
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_ejercicios/" class="md-nav__link">
+        Ejercicios. App con MVVM
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mvvm-vs-mvp" class="md-nav__link">
+    MVVM vs. MVP
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvvm-con-combine" class="md-nav__link">
+    MVVM con Combine
+  </a>
+  
+    <nav class="md-nav" aria-label="MVVM con Combine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vinculacion-entre-viewmodel-y-vista" class="md-nav__link">
+    Vinculación entre viewmodel y vista
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensamblaje-de-modelo-viewmodel-y-vista" class="md-nav__link">
+    "Ensamblaje" de modelo, viewmodel y vista
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>MVVM</h1>
+                
+                <h2 id="mvvm-vs-mvp">MVVM vs. MVP<a class="headerlink" href="#mvvm-vs-mvp" title="Permanent link">&para;</a></h2>
+<p>El patrón de diseño Model/View/ViewModel es muy similar al MVP que vimos en el apartado anterior. </p>
+<p><img alt="" src="../img/mvvm.png" /></p>
+<p>De hecho, el <em>ViewModel</em> tiene más o menos la misma funcionalidad que el <em>presenter</em>, implementar la lógica de presentación y aislarla de la tecnología concreta usada para la presentación.</p>
+<p>¿Dónde está la diferencia entonces?. En que MVVM soluciona uno de los principales problemas que tiene MVP, el acoplamiento entre vista y <em>presenter</em>. Como estuvimos discutiendo, la <em>vista</em> y el <em>presenter</em> deben "conocerse" mutuamente, ya que la vista debe comunicarle a este las acciones del usuario, y el <em>presenter</em> enviarle a la vista los datos a mostrar. Ya hemos visto en el código de ejemplo de MVP que en la vista hay una referencia al <em>presenter</em> y viceversa. Eso quiere decir que no es sencillo cambiar la implementación de uno de los dos sin afectar al otro.</p>
+<p>En MVVM no hay acoplamiento entre vista y <em>viewmodel</em>, y lo vamos a evitar usando <em>bindings</em>, es decir, vinculación automática entre los datos del <em>viewmodel</em> y la vista, de manera que cuando cambie alguno de ellos se modifique automáticamente la otra. Esto permite que el código quede mucho más "limpio", ya que no hay que actualizar el otro componente de modo explícito.</p>
+<p>En iOS podemos usar el <em>framework</em> <strong>Combine</strong> para hacer esta vinculación. Combine es un <em>framework</em> encuadrado en lo que se conoce comúnmente como "programación funcional reactiva". Si no has oído nunca este término no te preocupes, aquí solo vamos a usar algunas funcionalidades limitadas, y la idea básica no es difícil de entender.</p>
+<blockquote>
+<p>Combine fue presentado por Apple en la WWDC en junio del 2019. Antes de esto, para usar funcionalidades similares en una aplicación se podían emplear <em>frameworks</em> de terceros como <a href="https://github.com/ReactiveX/RxSwift">RXSwift</a> o <a href="https://github.com/DeclarativeHub/Bond">Bond</a>. Sin entrar en si éstos son mejores o peores que Combine, aquí usaremos este último para evitarnos incluir dependencias de terceros, ya que no necesitamos funcionalidades demasiado complejas. </p>
+</blockquote>
+<h2 id="mvvm-con-combine">MVVM con Combine<a class="headerlink" href="#mvvm-con-combine" title="Permanent link">&para;</a></h2>
+<p>Vamos a verlo con un ejemplo, ya que así se entenderán mejor los conceptos. Implementaremos  una versión MVVM de la aplicación <code>UAdivino</code>, al estilo de la que hicimos en el apartado anterior, es decir, mostrando cada tipo de respuesta de un color distinto. La diferencia fundamental va a estar en que vincularemos de modo automático tanto el texto de la respuesta como el color para que no haga falta fijarlos de forma explícita en la vista. Esta vinculación la haremos gracias al <em>framework</em> Combine. El código fuente está disponible en el <a href="https://github.com/ottocol/UAdivino_MVVM_Combine">repositorio de Github</a>.</p>
+<h3 id="vinculacion-entre-viewmodel-y-vista">Vinculación entre <em>viewmodel</em> y vista<a class="headerlink" href="#vinculacion-entre-viewmodel-y-vista" title="Permanent link">&para;</a></h3>
+<p>Al vincular un <em>origen</em> con un <em>destino</em> lo que hacemos es que cuando el primero cambia, el segundo también lo hace automáticamente. Esto simplifica mucho el código ya que podemos cambiar una propiedad del <em>viewmodel</em> y que se refleje automáticamente en la vista, o viceversa.</p>
+<p>En nuestro ejemplo del <code>UAdivino</code> queremos vincular dos propiedades del <em>viewmodel</em> con la vista: el texto de la respuesta y el color de la misma. En Combine los <em>bindings</em> se basan en la idea de <strong>Publishers</strong> y <strong>Subscribers</strong>. Esta es una idea similar a la de los eventos. Podemos indicar que queremos suscribirnos a un <em>publisher</em> de modo que se nos "avisará" de cuándo éste "emita" su valor. Lo más interesante es que los <em>publisher</em> pueden ser simplemente variables, y simplemente cambiar su valor hace que éste se "publique".</p>
+<p>Una idea adicional que como veremos es muy potente es que además la información que emiten los <em>publisher</em> se puede manipular, transformar y combinar con diversos operadores, permitiéndonos realizar tareas complejas de modo relativamente sencillo. </p>
+<blockquote>
+<p>Estas ideas no son exclusivas de Combine, sino que como hemos dicho son las que están tras el paradigma de <strong>programación funcional reactiva</strong>, aunque en este paradigma se suele usar una terminología distinta, hablando a veces de <em>observables</em> en lugar de <em>publishers</em> o  <em>streams</em> en lugar de <em>events</em>. Si tenéis interés en el tema podéis consultar <a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754">esta fantástica introducción</a>, que aunque no está explicada en el contexto de iOS ni en Swift introduce perfectamente las ideas de la programación funcional reactiva, que son perfectamente aplicables a cualquier lenguaje de desarrollo y cualquier tipo de aplicación.</p>
+</blockquote>
+<h4 id="en-el-viewmodel">En el <em>viewmodel</em><a class="headerlink" href="#en-el-viewmodel" title="Permanent link">&para;</a></h4>
+<p>Así, en el <em>viewmodel</em> definiremos el texto de la respuesta y su color como <em>publishers</em> , para poder luego vincularlos a la vista. Esto se hace con la anotación <code>@Published</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">import</span> <span class="nc">Combine</span>
+<span class="p">...</span>
+<span class="p">@</span><span class="n">Published</span> <span class="kd">var</span> <span class="nv">textoResp</span> <span class="p">=</span> <span class="s">&quot;&quot;</span>
+<span class="p">@</span><span class="n">Published</span> <span class="kd">var</span> <span class="nv">colorResp</span> <span class="p">=</span> <span class="n">ColorRespuesta</span><span class="p">.</span><span class="n">verde</span> 
+</code></pre></div>
+<p>En el ejemplo anterior hemos dado valores iniciales a los <em>publishers</em> para evitar problemas con los valores <code>nil</code>.</p>
+<h4 id="en-la-vista">En la vista<a class="headerlink" href="#en-la-vista" title="Permanent link">&para;</a></h4>
+<p>En la vista, para vincular el <em>publisher</em> con una propiedad de un elemento de <code>UIKit</code> usamos el método <code>assign(to:on:)</code>, donde con el <code>to:</code> especificamos cuál es la propiedad, y con el <code>on:</code> cuál es el elemento. </p>
+<p>Por ejemplo, queremos vincular el <em>publisher</em> <code>textoRespuesta</code> con la propiedad <code>text</code> de la etiqueta (<code>UILabel</code>) <code>respuestaLabel</code> que está en la vista. Eso lo haremos con la siguiente línea:</p>
+<div class="highlight"><pre><span></span><code><span class="n">viewModel</span><span class="p">.</span><span class="err">$</span><span class="n">textoResp</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="n">text</span><span class="p">!,</span> <span class="n">on</span><span class="p">:</span> <span class="n">respuestaLabel</span><span class="p">),</span>
+</code></pre></div>
+<p>A partir de este momento, cada vez que cambie la variable <code>textoRespuesta</code> en el <em>viewmodel</em> se actualizará automáticamente el texto de la etiqueta <code>respuestaLabel</code>.</p>
+<p>Fíjate en que:</p>
+<ul>
+<li>Usamos la notación <code>$</code> para indicar que queremos usar el valor "publicado" de <code>$textoResp</code>, es decir, que cada vez que cambie la variable original queremos recibir el nuevo valor</li>
+<li>Usamos la notación llamada <em>keypath</em> en Swift para expresar la propiedad de <code>respuestaLabel</code> a vincular. En esta notación se usa la sintaxis <code>\.nombre_de_propiedad</code> y si hubiera "subpropiedades" se seguirían concatenendo con puntos. Esta notación permite comprobar en tiempo de compilación que la propiedad es correcta, en lugar de poner una cadena que habría que evaluar en tiempo de ejecución. Finalmente hemos tenido que poner el <code>!</code> para desempaquetar el opcional, ya que el <code>text</code> de un <code>UILabel</code> es un opcional.</li>
+</ul>
+<p>Finalmente nótese que en debemos almacenar la vinculación o <em>binding</em> en una variable miembro de la clase <code>UAdivinoView</code>. Esto lo hacemos para que las vinculaciones no se pierdan mientras esta variable esté definida (como la vista está "viva" durante todo el ciclo de vida de la <em>app</em> pasará lo mismo con la variable miembro).</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//En el viewmodel</span>
+<span class="kd">private</span> <span class="kd">var</span> <span class="nv">bindingRespuesta</span> <span class="p">=</span> <span class="n">AnyCancellable</span><span class="p">!</span>
+<span class="p">...</span>
+<span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kc">super</span><span class="p">.</span><span class="n">viewDidLoad</span><span class="p">()</span>
+   <span class="n">bindingRespuesta</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">.</span><span class="err">$</span><span class="n">textoResp</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="n">text</span><span class="p">!,</span> <span class="n">on</span><span class="p">:</span> <span class="n">respuestaLabel</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="transformar-los-valores-de-un-publisher">Transformar los valores de un <em>publisher</em><a class="headerlink" href="#transformar-los-valores-de-un-publisher" title="Permanent link">&para;</a></h4>
+<p>Nos queda por vincular el <em>publisher</em> <code>colorResp</code> con la propiedad <code>textColor</code> de la etiqueta <code>respuestaLabel</code>. Sin embargo aquí tenemos un problema: <code>colorResp</code> es de un tipo definido por nosotros, <code>ColorRespuesta</code>, mientras que <code>textColor</code> es un tipo propio de <code>UIKit</code>. Por lo tanto no podemos aplicar directamente el <code>assign(to:on)</code>.</p>
+<p>Podríamos representar los colores en el <em>viewmodel</em> con <code>UIColor</code> para evitarnos esta discordancia de tipos, pero recordemos que el <em>viewmodel</em> no debería contener código de <code>UIKit</code>.</p>
+<p>Una idea bastante poderosa de <strong>los publishers</strong> es que los eventos que emiten <strong>se pueden transformar</strong> y además de modo encadenado. Para ello se pueden usar las primitivas típicas de programación funcional (<code>map</code>, <code>filter</code>,...) y además algunas adicionales (de ahí viene precisamente el apelativo de "funcional" de la programación funcional reactiva). Por tanto lo que haremos será transformar el evento en uno de tipo <code>UIColor</code> y vincular el color del <em>label</em> con este. En la vista haríamos algo como:</p>
+<div class="highlight"><pre><span></span><code><span class="n">viewModel</span><span class="p">.</span><span class="err">$</span><span class="n">colorResp</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span>
+    <span class="n">color</span> <span class="k">in</span>
+    <span class="n">color</span> <span class="p">==</span> <span class="n">ColorRespuesta</span><span class="p">.</span><span class="n">verde</span> <span class="p">?</span> <span class="bp">UIColor</span><span class="p">.</span><span class="n">green</span> <span class="p">:</span> <span class="bp">UIColor</span><span class="p">.</span><span class="n">red</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="n">textColor</span><span class="p">!,</span> <span class="n">on</span><span class="p">:</span> <span class="n">respuestaLabel</span><span class="p">)</span>
+</code></pre></div>
+<p>Recordemos que la primitiva <code>map</code> transforma un valor en otro.</p>
+<h4 id="vinculacion-de-vista-a-viewmodel">Vinculación de vista a <em>viewmodel</em><a class="headerlink" href="#vinculacion-de-vista-a-viewmodel" title="Permanent link">&para;</a></h4>
+<p>En el ejemplo de <code>UAdivino</code> no hay ningún caso de uso de vinculación en la dirección contraria, es decir, de la vista hacia el <em>viewmodel</em>, así que pondremos otro ejemplo. </p>
+<p>Supongamos una <em>app</em> con un campo de texto en que el usuario escribe un texto de búsqueda. En la vista tendremos definido un <em>outlet</em> que referencie el campo de texto. Nuestro objetivo es detectar cuándo cambia el texto del campo y asignarlo a alguna propiedad del <em>viewmodel</em>. Podemos aprovechar que cada vez que cambia el texto se emite una notificación del tipo <code>textDidChangeNotification</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">//En la vista</span>
+<span class="kd">let</span> <span class="nv">binding</span> <span class="p">:</span> <span class="n">AnyCancellable</span><span class="p">!</span>
+
+<span class="p">...</span>
+<span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+   <span class="n">binding</span> <span class="p">=</span> <span class="n">NotificationCenter</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">publisher</span><span class="p">(</span><span class="k">for</span><span class="p">:</span> <span class="bp">UITextField</span><span class="p">.</span><span class="n">textDidChangeNotification</span><span class="p">,</span> <span class="n">object</span><span class="p">:</span> <span class="n">textoField</span><span class="p">)</span>
+            <span class="c1">//obtenemos el UITextField que ha cambiado pero nos interesa el texto</span>
+            <span class="p">.</span><span class="n">compactMap</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">.</span><span class="n">object</span> <span class="k">as</span><span class="p">?</span> <span class="bp">UITextField</span><span class="p">)?.</span><span class="n">text</span> <span class="p">}</span>
+            <span class="c1">//Cambiamos el tipo de evento a &quot;genérico&quot;</span>
+            <span class="p">.</span><span class="n">eraseToAnyPublisher</span><span class="p">()</span>
+            <span class="c1">//asignamos el valor observado a una variable que nos interese</span>
+            <span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="n">texto</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="kc">self</span><span class="p">.</span><span class="n">viewModel</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En el ejemplo estamos suponiendo que podemos acceder al <em>viewmodel</em> desde la vista con una variable <code>viewModel</code> (ver el apartado siguiente). Entonces asignamos el valor "notificado" a la variable <code>texto</code> del <em>viewmodel</em>.</p>
+<blockquote>
+<p>Teóricamente esto se debería poder hacer de forma mucho más fácil simplemente observando los cambios en la propiedad <code>text</code> del campo de texto. Por desgracia aunque observar propiedades se puede hacer con muchos objetos, en la versión actual de iOS esta funcionalidad no se implementa con los <code>UIControl</code> (y <code>UITextField</code>lo es). Hay que decir que en <em>frameworks</em> de terceros como RxSwift esto sí es posible.</p>
+</blockquote>
+<h3 id="ensamblaje-de-modelo-viewmodel-y-vista">"Ensamblaje" de modelo, <em>viewmodel</em> y vista<a class="headerlink" href="#ensamblaje-de-modelo-viewmodel-y-vista" title="Permanent link">&para;</a></h3>
+<p>Al igual que en el caso de MVP, hay que conectar las "piezas": modelo, <em>viewmodel</em> y vista. Como según el esquema del patrón la vista "posee" al <em>viewmodel</em>, definiremos este como una propiedad de la vista:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">UAdivinoView</span> <span class="p">:</span> <span class="bp">UIViewController</span> <span class="p">{</span>
+   <span class="kd">let</span> <span class="nv">viewModel</span> <span class="p">=</span> <span class="n">UAdivinoViewModel</span><span class="p">()</span>
+   <span class="p">...</span>
+<span class="p">}</span> 
+</code></pre></div>
+<p>Y como el <em>viewmodel</em> "posee" al modelo definiremos este como una propiedad del primero:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">UAdivinoViewModel</span> <span class="p">{</span>
+   <span class="kd">let</span> <span class="nv">model</span> <span class="p">=</span> <span class="n">UAdivinoModel</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span> <span class="s">&quot;Rappel&quot;</span><span class="p">)</span>
+   <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En MVVM, una parte importante del ensamblaje es <strong>inicializar las vinculaciones o <em>bindings</em></strong>. Una forma sencilla de hacer esto es en el <code>viewDidLoad</code> de la vista:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kc">self</span><span class="p">.</span><span class="n">bindViewModel</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">bindViewModel</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//conectamos viewModel.textoResp -&gt; texto del label</span>
+    <span class="n">viewModel</span><span class="p">.</span><span class="err">$</span><span class="n">textoResp</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="err">\</span><span class="p">.</span><span class="n">text</span><span class="p">!,</span> <span class="n">on</span><span class="p">:</span> <span class="n">respuestaLabel</span><span class="p">)</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Pie">
+      
+        
+        <a href="../3_MVP/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: MVP" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              MVP
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../5_VIPER/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: VIPER" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              VIPER
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copiar al portapapeles", "clipboard.copied": "Copiado al portapapeles", "search.config.lang": "es", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "B\u00fasqueda", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.term.missing": "Falta", "select.version.title": "Seleccionar versi\u00f3n"}, "search": "../../assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.bc35569b.min.js"></script>
+      
+    
+  </body>
+</html>
