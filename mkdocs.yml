@@ -9,6 +9,7 @@ nav:
     - MVVM: 'arquitecturas/4_MVVM.md'
     - VIPER: 'arquitecturas/5_VIPER.md'
     - Ejercicios. App con MVVM: 'arquitecturas/6_ejercicios.md'
+    - Ejercicios. SwiftUI: 'arquitecturas/7_ejercicios_SwiftUI.md'
   
 
 theme:
