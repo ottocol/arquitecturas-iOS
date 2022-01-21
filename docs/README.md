@@ -1,0 +1,5 @@
+# Persistencia de datos en dispositivos iOS
+
+En este bloque veremos las distintas formas de almacenar datos en una aplicación iOS. Comenzaremos con el sistema de archivos, donde podemos almacenar información bien en un formato propio de nuestra *app* o bien en algún formato estándar de Apple como las *property lists*. Veremos también las *preferencias de usuario*, que se usan para almacenar de manera transparente al desarrollador datos sencillos, como los típicos que podemos necesitar para guardar la configuración de la *app*.
+
+La mayoría de las sesiones del bloque se dedica a *Core Data*, que es la tecnología recomendada por Apple para almacenar grandes cantidades de datos con posibilidad de filtrar y hacer búsquedas. *Core Data* es una especie de ORM (Object Relational Mapper) que nos permite trabajar con clases Swift y por defecto almacena los datos en una base de datos SQL (aunque esto último es transparente al desarrollador). Esto nos permite tener el rendimiento de una base de datos manteniendo un nivel de abstracción más alto en nuestro código.
