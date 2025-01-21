@@ -21,30 +21,71 @@ let modelo = TiempoModelo()
 
 ## Mostrar la descripción del tiempo (0,5 puntos)
 
+### Imprimir el tiempo en la consola
+
 En este apartado conseguiremos que al pulsar en el botón "consultar tiempo" la descripción en modo texto (p.ej. "sol") aparezca en la pantalla del dispositivo.
 
-En el *viewmodel*: `TiempoViewModel`
+Primero empezaremos por hacer que la información aparezca en la consola del desarrollador con un `print`.
 
-- Añade al comienzo un `import Combine`
-- Crea la propiedad que representa el estado actual del tiempo, `estado` de tipo String, asignándole como valor inicial la cadena vacía
-- Anota la propiedad con `@Published` para que se publiquen los cambios
-- crea el siguiente método, que llamará al modelo para consultar el tiempo actual
+El modelo (clase `TiempoModelo`) tiene un método `consultarTiempoActual(localidad:)` al que si le pasamos la localidad nos devolverá una tupla con un `estado` ("cielo claro", "nubes", "lluvioso",...) y una URL de un icono que representa gráficamente el tiempo (un sol, una pequeña nube, ...). Estos datos se obtienen de un API externo de un sitio llamado `OpenWeatherMap`.
+
+**En el *viewmodel* (clase `TiempoViewModel`) crea el siguiente método**, que llamará al modelo para consultar el tiempo actual
 
 ```swift
-func consultarTiempoActual(localidad : String) {
-  modelo.consultarTiempoActual(localidad: localidad) {
-    estado, urlIcono in
-    OperationQueue.main.addOperation {
-        //como al tocar estas propiedades se va a modificar la interfaz
-        //debemos hacerlo desde el hilo principal
-        self.estado = estado
-        //de momento no hacemos nada con `urlIcono`
+func consultarTiempoActual(localidad : String) async {
+    let result = try? await modelo.consultarTiempoActual(localidad: localidad)
+    if let result = result {
+        print(result)
     }
-  }
 }
 ```
 
-Fíjate que esta función le "pasa la pelota al modelo". Al ser una operación asíncrona, tras obtener la información, el modelo ejecuta la clausura que se le pasa como parámetro. Aquí lo que hacemos es copiar el texto del estado en la propiedad del *viewmodel* del mismo nombre.
+la llamada al API web que hace el modelo es una operación **asíncrona**, motivo por el cual en Swift se llama precedida de **await** (que significa algo así como "llama a esta operación y espera a que devuelva el resultado"). 
+
+Cuando en una función llamamos a una operación asíncrona, automáticamente se convierte también en asíncrona y el compilador nos exige que la marquemos como tal con **async** (que es lo que pasa en la cabecera de nuestra función). Las funciones que son **async** siempre se deben llamar precedidas de **await**.
+
+> Anteriormente vimos cómo llamar a operaciones asíncronas con colas de operaciones, `async` y `await` son la forma de trabajar con código asíncrono que está integrada en el propio lenguaje Swift desde la versión 5.5, mientras que las colas de operaciones son una biblioteca adicional no incluída en el "núcleo" de Swift.
+
+Falta que al pulsar el botón de "Ver el tiempo" se llame a `consultarTiempoActual` de `TiempoViewModel`. En la vista (clase `MainView`) al pulsar el botón se llama al IBAction `botonPulsado` (¡sorpresa!). Verás que la función contiene `Task {}`. Esto sirve para marcar secciones de código asíncrono, coloca dentro la siguiente línea:
+
+```swift
+await viewModel.consultarTiempoActual(localidad:campoTexto.text ?? "")
+```
+
+que llama de forma asíncrona al `consultarTiempoActual` del `viewModel`.
+
+De momento, prueba el código tal cual, debería imprimir en la consola el tiempo actual en la ciudad cuyo nombre escribas en el campo de texto, y vacío en caso de que no haya nada escrito o la ciudad no se encuentre.
+
+
+### Mostrar el tiempo en la interfaz gráfica
+
+
+En MVVM tenemos que vincular propiedades del viewmodel con componentes de UI de la vista.
+
+En el viewmodel (la clase `TiempoViewModel`)
+
+- Añade al comienzo un `import Combine`
+- Crea la propiedad que representa el estado actual del tiempo, `estado` de tipo String, asignándole como valor inicial la cadena vacía
+- Anota la propiedad con `@Published` para que Combine publique los cambios
+- En la función `consultarTiempoActual`, en lugar de imprimir los datos con `print`, simplemente debes asignarle a la propiedad `estado` el valor obtenido (`self.estado = result.estado`).
+
+Hay una cuestión importante:  vamos a vincular el cambio de la propiedad `self.estado` con un componente de UI. Recordemos de otras veces que la actualización de la interfaz se debe hacer en el hilo principal de la aplicación. Por tanto la línea `self.estado = result.estado` se debe ejecutar en el hilo principal. Hay dos formas de asegurarlo, la primera es con colas de operaciones:
+
+```swift
+OperationQueue.main.addOperation {
+    self.estado = result.estado
+}
+```
+
+La segunda es "más moderna", usando el soporte de concurrencia integrado en Swift. El hilo principal es `MainActor`:
+
+```swift
+await MainActor.run {
+    self.estado = result.estado
+}
+```
+
+Elige la forma que prefieras, ambas deberían ser equivalentes.
 
 En la vista: `MainView`
 
