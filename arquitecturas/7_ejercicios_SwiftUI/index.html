@@ -425,17 +425,8 @@
 <li>Los resultados solo los debes mostrar si no están vacíos, mira en la traspa cómo se hace para mostrar componentes de manera condicional</li>
 </ul>
 </li>
-<li>Para comunicarnos con el servidor podemos reutilizar el código del modelo de la versión sin SwiftUI. Para consultar el tiempo necesitas crear una instancia de <code>TiempoModelo</code> y sobre ella llamar al método <code>consultarTiempoActual(localidad:callback:)</code></li>
+<li>Para comunicarnos con el servidor usaremos el mismo <code>TiempoModelo</code> que en el ejercicio de MVVM. El método para consultar el tiempo es <code>consultarTiempoActual(localidad:)</code>. Recuerda que al ser un método asíncrono hay que llamarlo con await.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kd">let</span> <span class="nv">modelo</span> <span class="p">=</span> <span class="n">TiempoModelo</span><span class="p">()</span>
-<span class="p">...</span>
-<span class="n">modelo</span><span class="p">.</span><span class="n">consultarTiempoActual</span><span class="p">(</span><span class="n">localidad</span><span class="p">:</span> <span class="n">localidad</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">texto</span><span class="p">,</span> <span class="n">direccionIcono</span> <span class="k">in</span>
-    <span class="c1">//a partir de aquí, asignar &quot;texto&quot; y &quot;direccionIcono&quot; a propiedades @State</span>
-    <span class="c1">//para que se repinte la vista</span>
-    <span class="c1">//Ojo, tendrás que transformar direccionIcono String -&gt; URL -&gt; Data -&gt; UIImage</span>
-<span class="p">}</span>
-</code></pre></div>
 
 
 
