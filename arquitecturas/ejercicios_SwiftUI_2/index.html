@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../6_ejercicios/">
+        <link rel="prev" href="../ejercicios_SwiftUI_1/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Ejercicios. SwiftUI - Arquitecturas de apps iOS</title>
+        <title>Ejercicios SwiftUI II - Arquitecturas de apps iOS</title>
       
     
     
@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#app-de-mis-lugares-favoritos-1-punto" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -100,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ejercicios. SwiftUI
+              Ejercicios SwiftUI II
             
           </span>
         </div>
@@ -440,14 +445,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../6_ejercicios/" class="md-nav__link">
+      <a href="../ejercicios_SwiftUI_1/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Ejercicios. App con MVVM
+    Ejercicios SwiftUI I
   
 
     
@@ -475,6 +480,24 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios SwiftUI II
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -482,7 +505,7 @@
   <span class="md-ellipsis">
     
   
-    Ejercicios. SwiftUI
+    Ejercicios SwiftUI II
   
 
     
@@ -491,6 +514,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#app-de-mis-lugares-favoritos-1-punto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App de "mis lugares favoritos" (1 punto)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -522,6 +573,25 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#app-de-mis-lugares-favoritos-1-punto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        App de "mis lugares favoritos" (1 punto)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -537,19 +607,47 @@
 
 
 
-  <h1>Ejercicios. SwiftUI</h1>
+  <h1>Ejercicios SwiftUI II</h1>
 
-<p>El ejercicio completo se puntúa con <strong>1 punto</strong></p>
-<p>El objetivo del ejercicio es implementar la <em>app</em> del tiempo pero ahora con SwiftUI. Para ahorrar algo de tiempo coge la plantilla de proyecto de la sesión.</p>
-<p>Consejos:</p>
-<ul>
-<li>En general, intenta que primero se vea el texto con el estado del tiempo y una vez esté funcionando ocúpate del icono con la imagen, recuerda que este último hay que cargarlo desde una url y la cosa se complica un poco con él.</li>
-<li>Fíjate en la transparencia con el <a href="https://ottocol.github.io/pddm-traspas/traspas/swiftui/#/19">ejemplo de formulario</a><ul>
-<li>Puedes por ejemplo hacer dos secciones, una para el campo de texto donde se escribe la localidad y el botón y otra para mostrar los resultados en forma de texto y en forma gráfica</li>
-<li>Los resultados solo los debes mostrar si no están vacíos, mira en la traspa cómo se hace para mostrar componentes de manera condicional</li>
+<h2 id="app-de-mis-lugares-favoritos-1-punto">App de "mis lugares favoritos" (1 punto)<a class="headerlink" href="#app-de-mis-lugares-favoritos-1-punto" title="Permanent link">&para;</a></h2>
+<p>Implementa una mini-app en la que el usuario puede ver una lista de sitios turísticos o interesantes, al pulsar en el nombre de uno de ellos entrará en una página de detalle, donde además del nombre se ve una breve descripción y se puede marcar el sitio como favorito.</p>
+<p>Tendrás que:</p>
+<ol>
+<li>Implementar el modelo. 
+   Como base, puedes definir un struct <code>Lugar</code> con las propiedades:<ul>
+<li><code>id</code> (recuerda que SwiftUI lo necesita para listar, y que puedes usar la función <code>UUID()</code>)</li>
+<li><code>nombre</code></li>
+<li><code>descripcion</code></li>
+<li><code>favorito</code> (booleano)</li>
 </ul>
 </li>
-<li>Para comunicarnos con el servidor usaremos el mismo <code>TiempoModelo</code> que en el ejercicio de MVVM. El método para consultar el tiempo es <code>consultarTiempoActual(localidad:)</code>. Recuerda que al ser un método asíncrono hay que llamarlo con await.</li>
+</ol>
+<p>El modelo será una clase <code>LugaresModel</code> que contendrá un array de lugares. Recuerda hacerlo <code>@Observable</code></p>
+<ol start="2">
+<li>Como en la app no se pueden añadir lugares, para simplificar introduce unos cuantos al definir <code>LugarModel</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="n">Observable</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">LugaresModel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">lista</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Lugar</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="n">Lugar</span><span class="p">(</span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">(),</span><span class="w"> </span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Castillo de Santa Bárbara&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">descripcion</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Fortaleza de Alicante con vistas al mar.&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="c1">//define unos pocos más...</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol start="3">
+<li>La Lista (Pantalla 1):</li>
+</ol>
+<ul>
+<li>Usa un NavigationStack que contenga una List.</li>
+<li>Cada fila debe mostrar el nombre del lugar y un corazón rojo relleno si el sitio es favorito. El corazón lo puedes mostrar con un SF Symbol (<code>Image(systemName:)</code>) que sea "heart.fill" ("heart" es el mismo pero sin rellenar)</li>
+<li>En el NavigationLink puedes enviar el <code>id</code> y en el NavigationDestination buscar el <code>Lugar</code> correspondiente a ese <code>id</code> y mostrar la vista detalle pasándole un <em>binding</em> al objeto, como en el ejemplo de la lista de la compra.</li>
+</ul>
+<ol start="4">
+<li>El Detalle (Pantalla 2):</li>
+</ol>
+<ul>
+<li>Crea una vista que reciba el lugar usando <code>@Bindable</code></li>
+<li>Muestra la descripción y un Button para conmutar el estado de favorito.</li>
 </ul>
 
 

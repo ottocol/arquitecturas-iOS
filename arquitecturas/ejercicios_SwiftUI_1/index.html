@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="../swiftui_2/">
+      
+      
+        <link rel="next" href="../ejercicios_SwiftUI_2/">
       
       
         
@@ -19,7 +23,7 @@
     
     
       
-        <title>Intro - Arquitecturas de apps iOS</title>
+        <title>Ejercicios SwiftUI I - Arquitecturas de apps iOS</title>
       
     
     
@@ -67,6 +71,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#perfil-en-una-red-social-1-punto" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -98,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Intro
+              Ejercicios SwiftUI I
             
           </span>
         </div>
@@ -190,18 +199,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
         
           
           <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
@@ -222,7 +233,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -433,10 +444,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../ejercicios_SwiftUI_1/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios SwiftUI I
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -452,6 +488,35 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#perfil-en-una-red-social-1-punto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perfil en una red social (1 punto)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -510,6 +575,25 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#perfil-en-una-red-social-1-punto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perfil en una red social (1 punto)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -525,10 +609,44 @@
 
 
 
-  <h1>Intro</h1>
+  <h1>Ejercicios SwiftUI I</h1>
 
-<p>En este tema veremos algo que no está directamente relacionado con la persistencia, pero que es pertinente en este punto del curso. Hasta ahora hemos visto multitud de tecnologías para desarrollar aplicaciones en iOS, pero una cosa que nos falta es saber cómo estructurar el código de la aplicación para hacerlo lo más claro, mantenible y <em>testable</em> que sea posible. </p>
-<p>Ya vimos al comienzo del curso que la arquitectura recomendada por Apple es Modelo/Vista/Controlador, pero aunque es muy apropiada para ejemplos y para aplicaciones pequeñas, con aplicaciones más grandes presenta algunos problemas. Primero veremos cuáles son estos problemas y cómo solucionarlos aunque sea parcialmente y luego abordaremos otras arquitecturas que se han propuesto como alternativas al clásico MVC.</p>
+<h2 id="perfil-en-una-red-social-1-punto">Perfil en una red social (1 punto)<a class="headerlink" href="#perfil-en-una-red-social-1-punto" title="Permanent link">&para;</a></h2>
+<p>Crea una vista que represente una especie de "tarjeta" de perfil de un usuario en una red social. La pantalla debe incluir:</p>
+<ol>
+<li><strong>Nombre del usuario</strong><ul>
+<li>Texto fijo (por ejemplo: “Alex”, “María”, etc.)</li>
+</ul>
+</li>
+<li><strong>Número de seguidores</strong><ul>
+<li>Debe mostrarse en pantalla</li>
+<li>Debe actualizarse automáticamente al interactuar con el siguiente botón</li>
+</ul>
+</li>
+<li><strong>Botón “Seguir / Dejar de seguir”</strong><ul>
+<li>Debería estar en su propia vista</li>
+<li>Al pulsarlo:<ul>
+<li>cambia el estado de seguimiento. Además si estamos siguiendo al usuario debe aparecer en gris, y si no en azul</li>
+<li>cambia el texto del botón</li>
+<li>actualiza el número de seguidores</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Gestión del estado</strong><ul>
+<li>Usar <code>@State</code> para representar:<ul>
+<li>si el usuario está seguido o no</li>
+<li>el número de seguidores</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Layout</strong><ul>
+<li>Usar <code>VStack</code> y HStack</li>
+<li>Usar al menos <code>padding</code></li>
+</ul>
+</li>
+</ol>
 
 
 
