@@ -1,0 +1,1500 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../5_VIPER/">
+      
+      
+        <link rel="next" href="../swiftui_2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>SwiftUI I - Arquitecturas de apps iOS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="Teal" data-md-color-accent="Teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#swiftui-introduccion-y-cambio-de-paradigma" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-header__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arquitecturas de apps iOS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SwiftUI I
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-nav__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    Arquitecturas de apps iOS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas de aplicaciones en iOS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas de aplicaciones en iOS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_intro_arquitecturas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_MVC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MVC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_MVP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MVP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_MVVM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MVVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_VIPER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIPER
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SwiftUI I
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SwiftUI I
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-contexto-los-origenes-y-evolucion-de-swiftui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Contexto: los orígenes y evolución de SwiftUI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Contexto: los orígenes y evolución de SwiftUI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estado-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado Actual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-alcance-de-este-curso-ios-17-xcode-152" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El alcance de este curso: iOS 17 / Xcode 15.2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-uikit-vs-swiftui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. UIKit vs SwiftUI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-estructura-del-proyecto-el-ciclo-de-vida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructura del Proyecto: El Ciclo de Vida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anatomia-de-una-vista" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Anatomía de una Vista
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Anatomía de una Vista">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-some" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es some?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La preview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vistas-y-subvistas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vistas y subvistas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-layout-declarativo-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Layout Declarativo (Stacks)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Layout Declarativo (Stacks)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes Principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mas-sobre-el-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Más sobre el layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-la-vista-como-una-funcion-del-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. La vista como una función del estado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. La vista como una función del estado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-estado-con-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir el estado con @State
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-ciclo-de-repintado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El ciclo de repintado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-y-destruccion-de-vistas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creación y destrucción de vistas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-y-los-tipos-por-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @State y los tipos por referencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-comunicacion-padre-hijo-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Comunicación Padre-Hijo (@Binding)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../swiftui_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SwiftUI II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_ejercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios. App con MVVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_ejercicios_SwiftUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios. SwiftUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-contexto-los-origenes-y-evolucion-de-swiftui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Contexto: los orígenes y evolución de SwiftUI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Contexto: los orígenes y evolución de SwiftUI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estado-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado Actual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-alcance-de-este-curso-ios-17-xcode-152" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El alcance de este curso: iOS 17 / Xcode 15.2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-uikit-vs-swiftui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. UIKit vs SwiftUI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-estructura-del-proyecto-el-ciclo-de-vida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructura del Proyecto: El Ciclo de Vida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-anatomia-de-una-vista" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Anatomía de una Vista
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Anatomía de una Vista">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-some" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Qué es some?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La preview
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vistas-y-subvistas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vistas y subvistas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-layout-declarativo-stacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Layout Declarativo (Stacks)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Layout Declarativo (Stacks)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes Principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mas-sobre-el-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Más sobre el layout
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-la-vista-como-una-funcion-del-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. La vista como una función del estado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. La vista como una función del estado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-estado-con-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir el estado con @State
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#el-ciclo-de-repintado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        El ciclo de repintado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-y-destruccion-de-vistas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creación y destrucción de vistas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-y-los-tipos-por-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @State y los tipos por referencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-comunicacion-padre-hijo-binding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Comunicación Padre-Hijo (@Binding)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="swiftui-introduccion-y-cambio-de-paradigma">SwiftUI: Introducción y Cambio de Paradigma<a class="headerlink" href="#swiftui-introduccion-y-cambio-de-paradigma" title="Permanent link">&para;</a></h1>
+<h2 id="1-contexto-los-origenes-y-evolucion-de-swiftui">1. Contexto: los orígenes y evolución de SwiftUI<a class="headerlink" href="#1-contexto-los-origenes-y-evolucion-de-swiftui" title="Permanent link">&para;</a></h2>
+<p>SwiftUI fue presentado en la <strong>WWDC 2019,</strong> junto con iOS 13. Surgió como respuesta de Apple a la tendencia de la industria hacia los frameworks de UI declarativos como React o Flutter. </p>
+<div class="admonition info">
+<p class="admonition-title">React y Flutter</p>
+<p>React es un framework para el desarrollo web <em>frontend</em> y Flutter pretende cubrir el espectro <em>completo</em> de apps (web, escritorio, móviles). No son comparables son SwiftUI en el sentido de que no son <em>frameworks</em> nativos iOS pero sí inspiraron bastantes ideas en las que se basa SwiftUI (sobre todo la idea de vista como una función del estado de la app).</p>
+</div>
+</aside>
+<p>SwiftUI no es únicamente una biblioteca de componentes de usuario, la filosofía de programación es muy distinta a la de UIKit y mucho más parecida por ejemplo a la de Jetpack Compose en Android.</p>
+<h3 id="estado-actual">Estado Actual<a class="headerlink" href="#estado-actual" title="Permanent link">&para;</a></h3>
+<p>Tras varios años de iteración agresiva, SwiftUI ha dejado de ser una "beta técnica":</p>
+<ul>
+<li><strong>2019-2021 (iOS 13-14):</strong> Prometedor pero incompleto (faltaban componentes críticos como <code>CollectionView</code> o una navegación estable).</li>
+<li><strong>2022-2023 (iOS 15-16):</strong> Madurez. Se introducen <code>NavigationStack</code> y protocolos de layout avanzados.</li>
+<li><strong>Actualidad:</strong> Es la opción <strong>por defecto</strong> recomendada por Apple para nuevas Apps.  UIKit sigue siendo necesario para algunas cuestiones como mantener aplicaciones “legacy” o usar APIs muy específicas de bajo nivel.</li>
+</ul>
+<h3 id="el-alcance-de-este-curso-ios-17-xcode-152">El alcance de este curso: iOS 17 / Xcode 15.2<a class="headerlink" href="#el-alcance-de-este-curso-ios-17-xcode-152" title="Permanent link">&para;</a></h3>
+<p>En estas sesiones trabajaremos sobre el SDK de <strong>iOS 17</strong> (Swift 5.9). Esto es importante porque en esta versión hubo un cambio de arquitectura relevante:</p>
+<ol>
+<li><strong>Framework <code>Observation</code>:</strong> Usaremos las nuevas macros (<code>@Observable</code>) en lugar del antiguo protocolo <code>ObservableObject</code> y <code>@Published</code> (que veréis en muchos tutoriales antiguos).</li>
+<li><strong><code>NavigationStack</code>:</strong> Usaremos la navegación basada en datos, desechando el obsoleto <code>NavigationView</code>.</li>
+<li><strong>Macros:</strong> Uso extensivo de la nueva sintaxis de previsualización <code>#Preview</code>.</li>
+</ol>
+<blockquote>
+<p>Si buscáis documentación online, filtrad resultados posteriores a Junio de 2023. Las soluciones de SwiftUI de 2019-2022 suelen ser sintácticamente diferentes u obsoletas.
+</p>
+</blockquote>
+<h2 id="2-uikit-vs-swiftui">2. UIKit vs SwiftUI<a class="headerlink" href="#2-uikit-vs-swiftui" title="Permanent link">&para;</a></h2>
+<ul>
+<li>En UIKit (<strong>Imperativo</strong>), el programador es responsable de modificar las vistas manualmente cuando cambian los datos. Esto a menudo lleva a estados inconsistentes.</li>
+<li>En SwiftUI (<strong>Declarativo</strong>), la vista es una función pura del estado.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Importante</p>
+<p>En SwiftUI no actualizamos las vistas, actualizamos el estado (<code>@State</code>). El framework se encarga de repintar la UI automáticamente. Es similar a Jetpack Compose, o si tienes experiencia en desarrollo web, puedes compararlo a lo que sucede con <em>frameworks</em> de <em>frontend</em> como React o Vue</p>
+</div>
+<blockquote></blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>Concepto</strong></th>
+<th><strong>UIKit</strong></th>
+<th><strong>SwiftUI</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Componente Base</strong></td>
+<td><code>UIViewController</code> (Class)</td>
+<td><code>View</code> (Struct)</td>
+</tr>
+<tr>
+<td><strong>Diseño UI</strong></td>
+<td>Storyboard / XIB / AutoLayout</td>
+<td>Código Declarativo (Stacks)</td>
+</tr>
+<tr>
+<td><strong>Comunicación</strong></td>
+<td>Delegates / Target-Action</td>
+<td>Bindings / Closures</td>
+</tr>
+<tr>
+<td><strong>Gestión de Memoria</strong></td>
+<td>Referencias persistentes (Heap)</td>
+<td>Tipos de valor desechables (Stack)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-estructura-del-proyecto-el-ciclo-de-vida">3. Estructura del Proyecto: El Ciclo de Vida<a class="headerlink" href="#3-estructura-del-proyecto-el-ciclo-de-vida" title="Permanent link">&para;</a></h2>
+<p>En UIKit teníamos <code>AppDelegate</code> y <code>SceneDelegate</code>. En SwiftUI puro, el punto de entrada se simplifica drásticamente gracias al protocolo <strong><code>App</code></strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="n">main</span><span class="w"> </span><span class="c1">// 1. Punto de entrada (equivalente al main.m o @UIApplicationMain)</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">MiApp</span><span class="p">:</span><span class="w"> </span><span class="n">App</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 2. Protocolo App</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">Scene</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">WindowGroup</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 3. Escena</span>
+<span class="w">            </span><span class="n">ContentView</span><span class="p">()</span><span class="w"> </span><span class="c1">// 4. Vista Raíz</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li><strong><code>@main</code></strong>: Indica que este struct contiene la función estática principal que arranca el ejecutable.</li>
+<li><strong><code>App</code> Protocol</strong>: Sustituye al <code>UIApplicationDelegate</code>. Gestiona el ciclo de vida de la aplicación (active, background, inactive).</li>
+<li><strong><code>WindowGroup</code></strong>: Es una <strong>Escena</strong>. En iOS gestiona la ventana principal. En iPadOS o macOS, gestiona automáticamente múltiples ventanas si el usuario las crea.</li>
+<li><strong><code>ContentView</code></strong>: Es la vista raíz de tu jerarquía.</li>
+</ol>
+<blockquote>
+<p>Nota: Si necesitas el antiguo AppDelegate (por ejemplo, para notificaciones Push con Firebase), puedes inyectarlo usando el adaptador @UIApplicationDelegateAdaptor.
+</p>
+</blockquote>
+<h2 id="4-anatomia-de-una-vista">4. Anatomía de una Vista<a class="headerlink" href="#4-anatomia-de-una-vista" title="Permanent link">&para;</a></h2>
+<p>En SwiftUI, las vistas son estructuras (<code>structs</code>), no clases. Son extremadamente ligeras y se crean/destruyen constantemente, lo veremos con más detalle cuando hablemos del estado de una app</p>
+<p>Una vista mínima en SwiftUI podría ser algo así (la plantilla de proyecto de Xcode es algo más complicada porque incluye no solo un texto sino una imagen y eso, como veremos, obliga a agruparlos)</p>
+<div class="highlight"><pre><span></span><code><span class="kd">import</span><span class="w"> </span><span class="nc">SwiftUI</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">ContentView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li><strong><code>struct</code></strong>: Las vistas son tipos por valor, lo que los hace ligeros y desechables. No son objetos vivos en memoria como un <code>UIView</code>.</li>
+<li><strong><code>View</code></strong>: Es un protocolo.</li>
+<li><strong><code>body</code></strong>: Es una propiedad calculada. SwiftUI la llama cuando necesita pintar la vista. En un momento explicaremos el uso de <code>some</code>.</li>
+</ol>
+<p>SwiftUI usa más "magia" de la que parece a primera vista si no te fijas mucho en el código, por ejemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ContentView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">cargando</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Ejemplo&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;SwiftUI es mágico&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Saludar&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;hola&quot;</span><span class="p">)})</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Intuitivamente parece claro que queremos que nuestra vista sean dos campos de texto estáticos y un botón, pero si miramos el código desde el punto de vista de swift "puro", no tiene sentido: ¿una propiedad calculada que devuelve 3 valores uno al lado del otro?. Implícitamente SwiftUI está añadiendo código que combina los 3 objetos en una vista (si quieres más detalles busca información sobre la anotación <code>@ViewBuilder</code>, que es la que hace esta tarea y que <code>body</code> lleva implícita).</p>
+<h3 id="que-es-some">¿Qué es <code>some</code>?<a class="headerlink" href="#que-es-some" title="Permanent link">&para;</a></h3>
+<p>Verás que el <code>body</code> siempre se declara como: <code>var body: some View</code>.
+¿Por qué no devolvemos <code>Text</code> explícitamente? <strong><code>some View</code></strong> define un <strong>Tipo de Resultado Opaco</strong> (Opaque Result Type). Eso quiere decir que el compilador conoce el tipo exacto, pero el desarrollador no.</p>
+<p>Swift es de tipado estático fuerte. En nuestro ejemplo el tipo de la vista es sencillo, pero una vista real en SwiftUI tiene un tipo, digamos, “complicadillo”:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// El tipo real de tu vista podría ser algo así:</span>
+<span class="n">VStack</span><span class="p">&lt;</span><span class="n">TupleView</span><span class="o">&lt;</span><span class="p">(</span><span class="n">Text</span><span class="p">,</span><span class="w"> </span><span class="n">Button</span><span class="p">&lt;</span><span class="n">Text</span><span class="p">&gt;,</span><span class="w"> </span><span class="n">Image</span><span class="p">)</span><span class="o">&gt;&gt;</span>
+</code></pre></div>
+<p>Escribir eso es tedioso y frágil. Si cambiáramos el <code>Text</code> por un <code>Label</code>, tendríamos que cambiar la firma de la función. Al usar <code>some View</code>, le decimos al compilador:</p>
+<blockquote>
+<p>"Te prometo que voy a devolver UN tipo concreto que conforma al protocolo View, pero no te voy a decir cuál es en la firma pública. Tú calcúlalo por dentro".</p>
+</blockquote>
+<h3 id="la-preview">La <em>preview</em><a class="headerlink" href="#la-preview" title="Permanent link">&para;</a></h3>
+<p>Por defecto en la parte derecha de Xcode aparece una previsualización de la vista sin necesidad de ejecutar el código en el simulador. Podemos ver que se actualiza en tiempo real conforme vamos tecleando y cambiando cosas. Esta previsualización aparece gracias al código que hay después de la definición de la vista:</p>
+<div class="highlight"><pre><span></span><code><span class="p">#</span><span class="n">Preview</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ContentView</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ese <code>#preview</code> es una macro de Swift, lo que quiere decir que se expande a un código real algo más complicado pero que no nos hace falta conocer con detalle.</p>
+<div class="admonition info">
+<p class="admonition-title">Como curiosidad</p>
+<p>La preview no forma parte del "ejecutable" generado por el compilador, solo le sirve a Xcode</p>
+</div>
+<p>La <em>preview</em> es bastante flexible, ya que podemos <em>personalizarla</em>. Por ejemplo podemos mostrar cómo quedaría la vista en modo claro y modo oscuro:</p>
+<p><div class="highlight"><pre><span></span><code><span class="p">#</span><span class="n">Preview</span><span class="p">(</span><span class="s">&quot;Claro&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ContentView</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">preferredColorScheme</span><span class="p">(.</span><span class="n">light</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="n">Preview</span><span class="p">(</span><span class="s">&quot;Oscuro&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ContentView</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">preferredColorScheme</span><span class="p">(.</span><span class="n">dark</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+si hacemos esto, en la parte derecha de la ventana de Xcode aparecerán dos previews con las etiquetas que hemos puesto y podremos seleccionar la que queramos.</p>
+<p>Si tenemos una vista con propiedades (recordemos que no es más que un <code>struct</code> y por tanto puede tener campos), podemos pasarle fácilmente distintos valores a la <em>preview</em> para ver cómo quedaría la vista en cada caso, por ejemplo supongamos esta vista:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ContentView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">cargando</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cargando</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Cargando…&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Image</span><span class="p">(</span><span class="n">systemName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;photo&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>podemos generar distintas <em>previews</em> con distintos valores de la propiedad <code>cargando</code></p>
+<div class="highlight"><pre><span></span><code><span class="p">#</span><span class="n">Preview</span><span class="p">(</span><span class="s">&quot;Cargando&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ContentView</span><span class="p">(</span><span class="n">cargando</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="p">#</span><span class="n">Preview</span><span class="p">(</span><span class="s">&quot;Contenido&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ContentView</span><span class="p">(</span><span class="n">cargando</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="vistas-y-subvistas">Vistas y subvistas<a class="headerlink" href="#vistas-y-subvistas" title="Permanent link">&para;</a></h3>
+<p>SwiftUI se puede considerar un framework de UI orientado a componentes, donde estos son o bien primitivas de SwiftUI (como <code>Text</code> o <code>Image</code>) o bien componentes definidos por el desarrollador (como <code>ContentView</code>). Hasta ahora los componentes definidos por nosotros solamente contenían primitivas, pero nada nos impide crear nuestros propios subcomponentes (o subvistas, como las queramos llamar):</p>
+<h2 id="5-layout-declarativo-stacks">5. Layout Declarativo (Stacks)<a class="headerlink" href="#5-layout-declarativo-stacks" title="Permanent link">&para;</a></h2>
+<p>No existen las <em>Constraints</em> de AutoLayout. Maquetamos usando pilas (<strong>Stacks</strong>, similares a <code>UIStackView</code> de <code>UIKit</code>) y espaciadores (<strong>Spacers</strong>). El contenedor padre propone un tamaño, y la vista hija decide cuánto ocupar.</p>
+<h3 id="componentes-principales">Componentes Principales<a class="headerlink" href="#componentes-principales" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><code>VStack</code></strong>: Pila Vertical.</li>
+<li><strong><code>HStack</code></strong>: Pila Horizontal.</li>
+<li><strong><code>Spacer</code></strong>: Un "muelle" flexible que ocupa todo el espacio disponible, empujando el contenido.</li>
+<li><strong><code>.padding()</code></strong>: Añade espacio alrededor de la vista.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">HStack</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">Image</span><span class="p">(</span><span class="n">systemName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;globe&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// SF Symbol</span>
+
+<span class="w">    </span><span class="n">VStack</span><span class="p">(</span><span class="n">alignment</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">leading</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Perfil de Usuario&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">headline</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;iOS Developer&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">foregroundStyle</span><span class="p">(.</span><span class="n">secondary</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Spacer</span><span class="p">()</span><span class="w"> </span><span class="c1">// Empuja todo el contenido hacia la izquierda</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="n">padding</span><span class="p">()</span><span class="w"> </span><span class="c1">// Margen externo</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Ver el espacio ocupado por los componentes</p>
+<p>Al ser el fondo por defecto transparente no se suele apreciar bien dónde empieza y acaba cada componente. Como truco puedes añadir un <code>.background()</code> con un color como parámetro. Por ejemplo, para ver el espacio ocupado por el <code>HStack</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">HStack</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">//resto del código...</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="n">background</span><span class="p">(.</span><span class="n">green</span><span class="p">)</span>
+<span class="p">.</span><span class="n">padding</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<h3 id="mas-sobre-el-layout">Más sobre el layout<a class="headerlink" href="#mas-sobre-el-layout" title="Permanent link">&para;</a></h3>
+<p>En SwiftUI, los métodos como <code>.padding()</code> o <code>.background()</code> no modifican la propiedad de un objeto (como en UIKit). En su lugar, <strong>envuelven</strong> la vista original en una nueva vista modificada.</p>
+<p><strong>⚠️ El orden importa:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Caso A: El fondo envuelve al padding (Texto con margen coloreado)</span>
+<span class="n">Text</span><span class="p">(</span><span class="s">&quot;Botón&quot;</span><span class="p">).</span><span class="n">padding</span><span class="p">().</span><span class="n">background</span><span class="p">(.</span><span class="n">blue</span><span class="p">)</span>
+
+<span class="c1">// Caso B: El padding envuelve al fondo (Texto con fondo pegado y margen blanco fuera)</span>
+<span class="n">Text</span><span class="p">(</span><span class="s">&quot;Botón&quot;</span><span class="p">).</span><span class="n">background</span><span class="p">(.</span><span class="n">blue</span><span class="p">).</span><span class="n">padding</span><span class="p">()</span>
+</code></pre></div>
+<p>Tienes imágenes predefinidas, listas para usar, al igual que en <code>UIkit</code>, los <strong>SF Symbols:</strong>. Se usan como <code>Image(systemName: "nombre")</code> y se tratan como texto (acepta <code>.font</code> y <code>.foregroundStyle</code>).</p>
+<h2 id="6-la-vista-como-una-funcion-del-estado">6. La vista como una función del estado<a class="headerlink" href="#6-la-vista-como-una-funcion-del-estado" title="Permanent link">&para;</a></h2>
+<p>Una de las partes más interesantes de SwiftUI es que, como ya hemos dicho anteriormente, <strong>la vista es una función del estado de la aplicación</strong>, lo que elimina los problemas de inconsistencia que trae la actualización manual de la UI.</p>
+<p>En SwiftUI la vista se repinta cada vez que cambia el estado. Esto pasa porque la propiedad <code>body</code> se reevalúa. Vamos a ver un ejemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ContentView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Environment</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">colorScheme</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">esquema</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Modo actual: </span><span class="si">\(</span><span class="n">esquema</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="p">.</span><span class="n">dark</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">&quot;Oscuro&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Claro&quot;</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>En este ejemplo introducimos en la vista una especie de "estado o variable externa" que es el esquema de color activo en el dispositivo actualmente (modo oscuro o claro, representado con los enumerados <code>.dark</code> o <code>.light</code>). Si vamos al simulador (no vale la <em>preview</em>) y cambiamos el modo (<code>Features</code> &gt; <code>Toggle Appearance</code>) veremos cómo cambia el mensaje del componente <code>Text</code> porque la vista se está repintando.</p>
+<h3 id="definir-el-estado-con-state">Definir el estado con <code>@State</code><a class="headerlink" href="#definir-el-estado-con-state" title="Permanent link">&para;</a></h3>
+<p>En lugar de que el estado venga del entorno lo más habitual es definirlo en la propia vista anotando una variable con la anotación <code>@State</code>. Aquí tenemos el clásico ejemplo del contador, que viene a ser el "hola mundo" de todos los frameworks reactivos como SwiftUI (es de los primeros ejemplos que se suele poner en React, Angular, Vue, ...)</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ContentView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">valor</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">// &lt;--- La &quot;magia&quot;</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Contador: </span><span class="si">\(</span><span class="n">valor</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Incrementar&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">valor</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Cada vez que pulses el botón, se incrementará la variable <code>valor</code>. Como la variable pertenece al estado de la vista el cambio forzará a que se repinte.</p>
+<div class="admonition warning">
+<p class="admonition-title">A ver a ver, un momento...</p>
+<p>¿Pero en Swift los <code>struct</code> no son por defecto inmutables? ¿Qué está pasando aquí, como es posible que la variable dentro del <code>struct</code> esté cambiando su valor? En efecto, como los structs son inmutables , necesitamos un lugar externo para guardar los datos que cambian, y eso es lo que hace la anotación <code>@State</code>, le dice a SwiftUI: <em>"Guarda esta variable en una memoria persistente gestionada por ti, fuera del struct"</em>. Como puedes comprobar, si quitas la anotación <code>@State</code> de la variable, verás un error del compilador indicando que el struct es inmutable.</p>
+</div>
+<h3 id="el-ciclo-de-repintado">El ciclo de repintado<a class="headerlink" href="#el-ciclo-de-repintado" title="Permanent link">&para;</a></h3>
+<p>Al igual que en otros frameworks declarativos, SiwftUI no repinta todos los componentes de la vista, solo aquellos que deberían cambiar. Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ContentView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VStack</span><span class="p">(</span><span class="n">spacing</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">TextoFijo</span><span class="p">()</span>
+<span class="w">            </span><span class="n">TextoContador</span><span class="p">(</span><span class="n">contador</span><span class="p">:</span><span class="w"> </span><span class="n">contador</span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Incrementar&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">contador</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">TextoFijo</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">Self</span><span class="p">.</span><span class="n">_printChanges</span><span class="p">()</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Yo no dependo del contador&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">TextoContador</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">contador</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="p">=</span><span class="w">  </span><span class="kc">Self</span><span class="p">.</span><span class="n">_printChanges</span><span class="p">()</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Contador: </span><span class="si">\(</span><span class="n">contador</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aquí hemos separado los dos componentes en sus propias mini-vistas simplemente para poder llevar la pista de qué cambia y qué no, eso lo hacen las líneas <code>let _ =  Self._printChanges()</code> (en realidad solo haría falta el <code>Self._printChanges</code>, pero no es una instrucción que podamos meter dentro del <code>body</code> así que nos vemos obligados a asignarla a una variable cualquiera).</p>
+<p>Si ejecutas la aplicación en el simulador (NO en la <em>preview</em>) verás que al inicio cambian los dos componentes pero cada vez que pulsamos el vorón solo cambia el componente <code>TextoContador</code>. Swift solo repinta lo que cambia para ser lo más eficiente posible.</p>
+<h3 id="creacion-y-destruccion-de-vistas">Creación y destrucción de vistas<a class="headerlink" href="#creacion-y-destruccion-de-vistas" title="Permanent link">&para;</a></h3>
+<p>Fíjate en el siguiente ejemplo en el que una vista "madre" contiene una vista hija de tipo Contador, con estado, pero que no existe siempre, sino solo si un <em>toggle</em> en la vista madre está activo:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ContadorView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="kd">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;ContadorView init&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;ContadorView body&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">VStack</span><span class="p">(</span><span class="n">spacing</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Contador: </span><span class="si">\(</span><span class="n">contador</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Incrementar&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">contador</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">.</span><span class="n">padding</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">border</span><span class="p">(.</span><span class="n">blue</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">MadreView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">mostrarContador</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;MadreView body&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">VStack</span><span class="p">(</span><span class="n">spacing</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="n">Toggle</span><span class="p">(</span><span class="s">&quot;Mostrar contador&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">isOn</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">mostrarContador</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">mostrarContador</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">ContadorView</span><span class="p">()</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">.</span><span class="n">padding</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Si ejecutas el código verás varias cosas:</p>
+<ul>
+<li>Cada vez que SwiftUI tiene que repintar una vista se reevalúa el <code>body</code></li>
+<li>Cuando dejas de mostrar la vista hija que hace de contador, la vista hija se destruye junto con con su estado asociado. Cuando la volvemos a mostrar se vuelve a crear (se ve el print del init) y el contador comienza otra vez de cero. Esto indica que en SwiftUI los structs que escribimos no son las vistas "vivas" sino <em>descripciones de cómo construir una vista</em>. SwiftUI decide cuándo crear/destruir las vistas "vivas".</li>
+</ul>
+<h3 id="state-y-los-tipos-por-referencia"><code>@State</code> y los tipos por referencia<a class="headerlink" href="#state-y-los-tipos-por-referencia" title="Permanent link">&para;</a></h3>
+<p><code>@State</code> funciona directamente solo con los tipos por valor, como <code>Int</code>, <code>Bool</code>, ... o incluso <code>struct</code> pero no con las clases, el siguiente ejemplo, en el que encapsulamos el estado y la lógica de un contador en una clase propia no funcionará correctamente:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span><span class="w"> </span><span class="nc">Contador</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">valor</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">maximo</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span>
+
+<span class="w">    </span><span class="kd">init</span><span class="p">(</span><span class="n">valor</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">,</span><span class="w"> </span><span class="n">maximo</span><span class="p">:</span><span class="w"> </span><span class="nb">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="n">valor</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">valor</span>
+<span class="w">        </span><span class="kc">self</span><span class="p">.</span><span class="n">maximo</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">maximo</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">inc</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">valor</span><span class="p">&lt;</span><span class="n">maximo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kc">self</span><span class="p">.</span><span class="n">valor</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">ContentView</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">contador</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Contador</span><span class="p">(</span><span class="n">valor</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">maximo</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;</span><span class="si">\(</span><span class="n">contador</span><span class="p">.</span><span class="n">valor</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Incrementar&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">action</span><span class="p">:{</span>
+<span class="w">            </span><span class="n">contador</span><span class="p">.</span><span class="n">inc</span><span class="p">()</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Si lo probáis veréis que el contador no se incrementa, porque <code>@State</code> está diseñado en principio para tipos por valor, SwiftUI solo "reacciona" al cambio si asigamos un nuevo valor a la variable marcada con <code>@State</code>, pero en este caso no estamos asignando un nuevo valor, sino llamando a un método que cambia una propiedad <em>dentro del objeto</em>.</p>
+<p>A partir de iOS 17 podemos conseguir que el ejemplo anterior funcione simplemente precediendo la clase <code>Contador</code> de la macro <code>@Observable</code>. Podéis probarla y comprobar que el contador ya funciona correctamente, pero ya explicaremos su uso con más detalle en la siguiente sesión. En versiones anteriores, el mismo efecto se podía conseguir indicando que la clase implementa el protocolo <code>ObservedObject</code> y marcando la propiedad cuyos cambios queremos detectar (en nuestro caso <code>valor</code> con la anotación <code>@Published</code>).</p>
+<h2 id="7-comunicacion-padre-hijo-binding">7. Comunicación Padre-Hijo (<code>@Binding</code>)<a class="headerlink" href="#7-comunicacion-padre-hijo-binding" title="Permanent link">&para;</a></h2>
+<p>Si necesitamos que una vista hija modifique el estado de su padre, no podemos pasarle una copia del valor. Necesitamos pasarle una referencia de escritura.</p>
+<ul>
+<li><strong>Sin <code>$</code></strong>: Pasas el valor (Lectura).</li>
+<li><strong>Con <code>$</code></strong>: Pasas el Binding (Lectura y Escritura).</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// VISTA PADRE</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">ParentView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isOn</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">valor</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">isOn</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">&quot;activo&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;inactivo&quot;</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// Pasamos el binding con $</span>
+<span class="w">        </span><span class="n">ChildView</span><span class="p">(</span><span class="n">isOn</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">isOn</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// VISTA HIJA</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">ChildView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Binding</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isOn</span><span class="p">:</span><span class="w"> </span><span class="nb">Bool</span><span class="w"> </span><span class="c1">// Recibe referencia</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Toggle</span><span class="p">(</span><span class="s">&quot;Activar&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">isOn</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">isOn</span><span class="p">)</span><span class="w"> </span><span class="c1">// Modifica el estado del padre</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Tened en cuenta que en SwiftUI las vistas "del sistema" como Text o Toggle también son vistas hijas de la actual, de modo que el ejemplo anterior también requeriría un <em>binding</em> aunque solamente hubiera una vista propia:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ToggleView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">isOn</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">valor</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">isOn</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="s">&quot;activo&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;inactivo&quot;</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// Pasamos el binding con $</span>
+<span class="w">        </span><span class="n">Toggle</span><span class="p">(</span><span class="s">&quot;Activar&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">isOn</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">isOn</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>El <code>Toggle</code> modifica un estado que no es suyo sino de <code>ToggleView</code> y por eso necesita que le pasemos el valor como un <em>binding</em>, pero no hace falta definir la variable <code>isOn</code> como <code>@Binding</code> porque sí pertenece a la vista en la que se define, <code>ToggleView</code>, no la recibimos de otra vista.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

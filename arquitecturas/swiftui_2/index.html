@@ -1,0 +1,1423 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../swiftui_1/">
+      
+      
+        <link rel="next" href="../6_ejercicios/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>SwiftUI II - Arquitecturas de apps iOS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="Teal" data-md-color-accent="Teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#swiftui-modelos-listas-y-navegacion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-header__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Arquitecturas de apps iOS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SwiftUI II
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Arquitecturas de apps iOS" class="md-nav__button md-logo" aria-label="Arquitecturas de apps iOS" data-md-component="logo">
+      
+  <img src="../../logo.png" alt="logo">
+
+    </a>
+    Arquitecturas de apps iOS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas de aplicaciones en iOS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas de aplicaciones en iOS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_intro_arquitecturas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_MVC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MVC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_MVP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MVP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_MVVM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MVVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_VIPER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VIPER
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../swiftui_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SwiftUI I
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SwiftUI II
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SwiftUI II
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-el-modelo-en-swiftui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. El modelo en SwiftUI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. El modelo en SwiftUI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir el modelo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convertir-el-modelo-en-observable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convertir el modelo en observable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propiedad-del-modelo-quien-lo-crea-y-cuanto-vive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propiedad del modelo: quién lo crea y cuánto "vive"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inyeccion-y-edicion-del-modelo-en-vistas-hijas-bindable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inyección y edición del modelo en vistas hijas (@Bindable)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-listas-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Listas (List)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Listas (List)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listas-estaticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas estáticas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listas-dinamicas-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas dinámicas simples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listas-dinamicas-complejas-con-foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas dinámicas complejas con ForEach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-completo-listar-los-items-de-la-compra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo Completo: Listar los Items de la Compra
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-navegacion-con-navigationstack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Navegación con NavigationStack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Navegación con NavigationStack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-mas-complejo-navegando-al-detalle-de-un-producto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo más complejo: Navegando al detalle de un producto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-modales-y-hojas-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Modales y Hojas (.sheet)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_ejercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios. App con MVVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_ejercicios_SwiftUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios. SwiftUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-el-modelo-en-swiftui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. El modelo en SwiftUI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. El modelo en SwiftUI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-modelo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definir el modelo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convertir-el-modelo-en-observable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Convertir el modelo en observable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propiedad-del-modelo-quien-lo-crea-y-cuanto-vive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propiedad del modelo: quién lo crea y cuánto "vive"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inyeccion-y-edicion-del-modelo-en-vistas-hijas-bindable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inyección y edición del modelo en vistas hijas (@Bindable)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-listas-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Listas (List)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Listas (List)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listas-estaticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas estáticas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listas-dinamicas-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas dinámicas simples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listas-dinamicas-complejas-con-foreach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas dinámicas complejas con ForEach
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-completo-listar-los-items-de-la-compra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo Completo: Listar los Items de la Compra
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-navegacion-con-navigationstack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Navegación con NavigationStack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Navegación con NavigationStack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-mas-complejo-navegando-al-detalle-de-un-producto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo más complejo: Navegando al detalle de un producto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-modales-y-hojas-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Modales y Hojas (.sheet)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="swiftui-modelos-listas-y-navegacion">SwiftUI: modelos, listas y navegación<a class="headerlink" href="#swiftui-modelos-listas-y-navegacion" title="Permanent link">&para;</a></h1>
+<p>En la sesión anterior vimos los elementos más básicos de SwiftUI y una idea central al <em>framework</em> que es la vista como función del estado. Vimos que el estado se puede definir en las vistas con <code>@State</code> pero esta no es una solución escalable para aplicaciones con un estado complejo. Aquí vamos a ver cómo podemos almacenar estado que persista durante toda la vida de la aplicación aunque vayamos cambiando entre vistas, que sea accesible por todas ellas y cómo navegar entre vistas.</p>
+<h2 id="1-el-modelo-en-swiftui">1. El modelo en SwiftUI<a class="headerlink" href="#1-el-modelo-en-swiftui" title="Permanent link">&para;</a></h2>
+<p>La mayoría de aplicaciones complejas tienen un estado complejo, con muchos datos que probablemente queremos hacer accesibles a varias vistas. En lugar de ir definiendo este estado variable a variable con <code>@State</code> dentro de las vistas es mejor definir uno o varios modelos, clases que almacenen el estado de la app e implementen la lógica de negocio. En SwiftUI podemos hacer que esas clases sean "reactivas", es decir que los cambios actualicen automáticamente la UI simplemente anotándolas con la macro <code>@Observable</code>.</p>
+<h3 id="definir-el-modelo">Definir el modelo<a class="headerlink" href="#definir-el-modelo" title="Permanent link">&para;</a></h3>
+<p>Por ejemplo, supongamos que queremos hacer una app para gestionar nuestra lista de la compra. Aquí tendríamos una versión inicial de nuestro modelo en la que cada elemento de la lista (cada <code>Item</code>) simplemente tiene un nombre: "pan", "patatas", ... y de momento solo podemos añadir un nuevo item a la lista.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Item</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">nombre</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="p">}</span>
+
+<span class="kd">class</span><span class="w"> </span><span class="nc">ListaModel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Item</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">addItem</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">new</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Item</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span>
+<span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="convertir-el-modelo-en-observable">Convertir el modelo en observable<a class="headerlink" href="#convertir-el-modelo-en-observable" title="Permanent link">&para;</a></h3>
+<p>El modelo anterior tiene un problema y es que usado junto con <code>@State</code> para asociarlo a la vista, no nos asegura que SwiftUI vaya a actualizar la vista automáticamente al cambiar el modelo, al ser éste una clase y por tanto en Swift un tipo por referencia. Ya vimos que <code>@State</code> no funcionaba bien con tipos por referencia. </p>
+<p>Esta sería una interfaz muy simplificada, con un campo de texto para escribir el nombre del producto, un botón para añadirlo, y una subvista para mostrar el total de items. Dejaremos el mostrar la lista para un apartado posterior, ya que es algo más complicado.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ListaCompraView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ListaModel</span><span class="p">()</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">nuevoItem</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">VStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">CuentaView</span><span class="p">(</span><span class="n">model</span><span class="p">:</span><span class="w"> </span><span class="n">model</span><span class="p">)</span>
+<span class="w">            </span><span class="n">TextField</span><span class="p">(</span><span class="s">&quot;Nuevo producto&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">nuevoItem</span><span class="p">)</span>
+<span class="w">            </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Añadir&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">guard</span><span class="w"> </span><span class="o">!</span><span class="n">nuevoItem</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">}</span>
+<span class="w">                </span><span class="n">model</span><span class="p">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="n">nuevoItem</span><span class="p">)</span>
+<span class="w">                </span><span class="n">nuevoItem</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">CuentaView</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ListaModel</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Hay </span><span class="si">\(</span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s"> productos&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Si probamos la aplicación veremos que el número de productos no se actualiza al añadir nuevos, ya que SwiftUI no detecta el cambio en el array <code>items</code> y por tanto no ve la necesidad de repintar <code>CuentaView</code>. Para solucionar el problema, a partir de iOS17 podemos usar la macro <code>@Observable</code> para anotar la clase del modelo que queremos hacer "reactiva" a cambios. De este modo SwiftUI reaccionará automáticamente a cualquier cambio en los valores del modelo. </p>
+<p>Aprovechamos para imprimir en la consola la lista de la compra cada vez que añadimos un item ya que no tenemos una interfaz para mostrarla.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//necesario para @Observable</span>
+<span class="kd">import</span><span class="w"> </span><span class="nc">Observation</span>
+
+<span class="c1">//igual que antes</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Item</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">nombre</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="n">Observable</span><span class="w"> </span><span class="c1">//Único cambio</span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">ListaModel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Item</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">addItem</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">new</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Item</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span>
+<span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;🛒 Lista actual:&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;- </span><span class="si">\(</span><span class="nv">$0</span><span class="p">.</span><span class="n">nombre</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ahora la aplicación ya funcionará correctamente, mostrando el número de productos en la UI y de momento la lista solo por la consola.</p>
+<div class="admonition note">
+<p class="admonition-title">SwiftUI y MVVM</p>
+<p>Si conoces el patrón de diseño MVVM (Model/View/View Model) te habrás dado cuenta de que se parece bastante a lo que acabamos de comentar. No obstante, al contrario de lo que sucedió con UIkit, donde Apple "abrazó" completamente el patrón de diseño MVC, referenciándolo constantemente en su documentación, con SwiftUI ha evitado referenciar MVVM en la documentación oficial pese a que el paralelismo entre los <code>@Observable</code> de SwiftUI y los "View Model" de MVVM es más que evidente. La cuestión es que siendo "MVVM-ortodoxos" deberíamos implementar además uno o varios "Model", que serían clases Swift que encapsulan el estado y la lógica de negocio de manera independiente de la UI, mientras que los <em>view models</em> contienen solo el estado que queremos mostrar en la UI más cuestiones adicionales como estados de carga ("cargando", "error",...) . Sin embargo, no hay una forma oficial sancionada por Apple de implementar esto, así que puedes organizar tu código en este sentido como mejor te parezca y simplemente olvidarte de MVVM.</p>
+</div>
+<h3 id="propiedad-del-modelo-quien-lo-crea-y-cuanto-vive">Propiedad del modelo: quién lo crea y cuánto "vive"<a class="headerlink" href="#propiedad-del-modelo-quien-lo-crea-y-cuanto-vive" title="Permanent link">&para;</a></h3>
+<p>Una vez que tenemos un modelo observable, la siguiente pregunta clave es <strong>dónde se crea ese modelo y quién es su propietario</strong>. Esto determina <strong>cuánto tiempo vive</strong> y <strong>qué vistas pueden acceder a él</strong>.</p>
+<h4 id="modelo-poseido-por-una-vista-state">Modelo poseído por una vista (<code>@State</code>)<a class="headerlink" href="#modelo-poseido-por-una-vista-state" title="Permanent link">&para;</a></h4>
+<p>Este es el caso que hemos visto hasta ahora. Cuando una vista <strong>crea y es propietaria</strong> del modelo, lo habitual es almacenarlo como <code>@State</code>. Esto hace que la instancia del modelo:</p>
+<ul>
+<li>Se cree una sola vez mientras la vista esté viva</li>
+<li>Se mantenga entre repintados de la vista</li>
+<li>Se destruya cuando la vista desaparece definitivamente</li>
+</ul>
+<p>En nuestro ejemplo,  <code>ListaCompraView</code> es claramente la <strong>dueña del modelo</strong>. Otras vistas no pueden acceder a él a menos que se lo pasemos explícitamente, como hacemos con <code>CuentaView</code>.</p>
+<p>Este patrón es adecuado cuando:</p>
+<ul>
+<li>El estado pertenece conceptualmente a una pantalla concreta</li>
+<li>No necesitamos compartirlo con muchas vistas no relacionadas</li>
+</ul>
+<h4 id="modelo-compartido-por-toda-la-app-environment">Modelo compartido por toda la app (<code>@Environment</code>)<a class="headerlink" href="#modelo-compartido-por-toda-la-app-environment" title="Permanent link">&para;</a></h4>
+<p>En aplicaciones reales suele interesar que ciertos datos <strong>persistan durante toda la vida de la aplicación</strong>, aunque naveguemos entre vistas. En SwiftUI esto se consigue <strong>inyectando el modelo en el entorno</strong>.</p>
+<p>Normalmente esto se hace en el punto de entrada de la app:</p>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="n">main</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">ListaCompraApp</span><span class="p">:</span><span class="w"> </span><span class="n">App</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ListaModel</span><span class="p">()</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">Scene</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">WindowGroup</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">ListaCompraView</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="n">environment</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A partir de ese momento, <strong>cualquier vista del árbol</strong> puede acceder al modelo usando:</p>
+<div class="highlight"><pre><span></span><code><span class="p">@</span><span class="n">Environment</span><span class="p">(</span><span class="n">ListaModel</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span>
+</code></pre></div>
+<p>Por ejemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">CuentaView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Environment</span><span class="p">(</span><span class="n">ListaModel</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Items: </span><span class="si">\(</span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="bp">count</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Este patrón es adecuado cuando:</p>
+<ul>
+<li>El estado representa datos “globales” de la app</li>
+<li>Queremos evitar pasar el modelo manualmente por muchas vistas intermedias</li>
+<li>El modelo debe sobrevivir a la navegación</li>
+</ul>
+<h3 id="inyeccion-y-edicion-del-modelo-en-vistas-hijas-bindable">Inyección y edición del modelo en vistas hijas (<code>@Bindable</code>)<a class="headerlink" href="#inyeccion-y-edicion-del-modelo-en-vistas-hijas-bindable" title="Permanent link">&para;</a></h3>
+<p>Normalmente una vista no trabaja sola. Es habitual que una vista hija necesite no solo leer sino también <strong>modificar</strong> un modelo que pertenece a otra vista o que viene del entorno.</p>
+<p>Supongamos que una vista raíz crea el modelo y lo pasa a una vista hija:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ListaCompraView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ListaModel</span><span class="p">()</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Esta vista muestra la lista en pantalla, y permite editarla</span>
+<span class="w">        </span><span class="n">ListaItemsView</span><span class="p">(</span><span class="n">model</span><span class="p">:</span><span class="w"> </span><span class="n">model</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>La vista hija recibe el modelo, pero <strong>no es su propietaria</strong>. Si necesita poder modificarlo y que esos cambios se reflejen en la UI tenemos que pasar el modelo de otra manera.</p>
+<p>Cuando una vista <strong>recibe un modelo observable</strong> y va a modificar directamente sus propiedades, debe declararlo como <code>@Bindable</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ListaItemsView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Bindable</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="p">:</span><span class="w"> </span><span class="n">ListaModel</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//Aqui listaríamos los items y pondríamos botones para editar, eliminar...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esto es el equivalente conceptual a <code>@Binding</code>, pero aplicado a <strong>objetos observables completos</strong> en lugar de structs o valores simples.</p>
+<h2 id="2-listas-list">2. Listas (<code>List</code>)<a class="headerlink" href="#2-listas-list" title="Permanent link">&para;</a></h2>
+<p>En UIKit el componente típico para mostrar datos es el <code>UITableView</code>. En SwiftUI es <strong><code>List</code></strong>. La principal diferencia es que no necesitamos implementar métodos para decir cuántas filas hay o qué celda cargar: simplemente le pasamos la colección de datos y una clausura que define cómo se ve cada fila.</p>
+<h3 id="listas-estaticas">Listas estáticas<a class="headerlink" href="#listas-estaticas" title="Permanent link">&para;</a></h3>
+<p>Al igual que en UIKit existen las tablas estáticas con filas fijas, en SwiftUI también podemos poner elementos fijos en una colección, que no están generados dinámicamente. Podemos dividir la lista en secciones que aparecerán visualmente separadas del resto:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//Fijaros en el estilo más que en el contenido del ejemplo, </span>
+<span class="c1">//en la realidad estas tareas no serían fijas, sino sacadas de una BD</span>
+<span class="n">List</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Section</span><span class="p">(</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Urgente&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Comprar leche&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Pagar alquiler&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Section</span><span class="p">(</span><span class="n">header</span><span class="p">:</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Para luego&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">footer</span><span class="p">:</span><span class="w"> </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Estas tareas no tienen prioridad&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Lavar el coche&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>La lista anterior tendría un aspecto similar al de esta figura:</p>
+<p><img alt="" src="../img/swiftui/static-list.png" /></p>
+<h3 id="listas-dinamicas-simples">Listas dinámicas simples<a class="headerlink" href="#listas-dinamicas-simples" title="Permanent link">&para;</a></h3>
+<h4 id="requisito-el-protocolo-identifiable">Requisito: El protocolo <code>Identifiable</code><a class="headerlink" href="#requisito-el-protocolo-identifiable" title="Permanent link">&para;</a></h4>
+<p>Para que SwiftUI pueda gestionar una lista dinámica de forma eficiente (saber qué elemento se ha borrado, movido o editado), necesita que cada elemento sea único. Para ello, nuestros modelos deben implementar el protocolo <code>Identifiable</code>.</p>
+<p>Esto normalmente se resuelve añadiendo una propiedad <code>id</code>. Podemos añadir un id a nuestros items de la lista de la compra del siguiente modo:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">Item</span><span class="p">:</span><span class="w"> </span><span class="n">Identifiable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">()</span><span class="w"> </span><span class="c1">// Genera un identificador único automático</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="p">}</span>
+</code></pre></div>
+En una implementación más realista en cuanto a persistencia, el id podría venir del servidor o de la base de datos.</p>
+<div class="admonition note">
+<p class="admonition-title">Por qué necesita SwiftUI que cada elemento tenga un id</p>
+<p>Como hemos comentado es para poder gestionar la lista de forma eficiente. SwiftUI consigue pintar los componentes de forma eficiente encontrando la diferencia entre el aspecto de la vista con el estado anterior y el aspecto actual. Si se borra un item de la lista, SwiftUI necesita saber que se ha borrado ese, no es que se haya cambiado el orden de los demás. Lo más fácil para esto es que cada elemento de un <code>List</code> tenga un id único, lo que elimina la ambigüedad.</p>
+</div>
+<h4 id="generar-la-lista">Generar la lista<a class="headerlink" href="#generar-la-lista" title="Permanent link">&para;</a></h4>
+<p>Al componente <code>List</code> le podemos pasar como parámetro una colección de elementos para que itere automáticamente por ellos. Ahora podemos sustituir la impresión por consola de la lista de la compra por una lista mostrada en la interfaz:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ListaItemsView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Bindable</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="p">:</span><span class="w"> </span><span class="n">ListaModel</span><span class="w"> </span><span class="c1">// Recibimos el modelo para poder interactuar</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span>
+<span class="w">            </span><span class="n">HStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Image</span><span class="p">(</span><span class="n">systemName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cart&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">foregroundStyle</span><span class="p">(.</span><span class="n">blue</span><span class="p">)</span>
+<span class="w">                </span><span class="n">Text</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">nombre</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="listas-dinamicas-complejas-con-foreach">Listas dinámicas complejas con <code>ForEach</code><a class="headerlink" href="#listas-dinamicas-complejas-con-foreach" title="Permanent link">&para;</a></h3>
+<p>A veces no queremos que toda la vista sea una lista, o queremos combinar elementos estáticos con dinámicos. Para ello podemos usar <code>ForEach</code>, que nos da un mayor control.</p>
+<p>Dentro de un componente <code>List</code>, un <code>ForEach</code> nos permite habilitar funcionalidades avanzadas como el "deslizar para borrar".</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Section</span><span class="p">(</span><span class="s">&quot;Cabecera estática&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Estos productos son urgentes&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Section</span><span class="p">(</span><span class="s">&quot;Mi Lista&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ForEach</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span>
+<span class="w">            </span><span class="n">Text</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">nombre</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">.</span><span class="n">onDelete</span><span class="p">(</span><span class="n">perform</span><span class="p">:</span><span class="w"> </span><span class="n">borrarItem</span><span class="p">)</span><span class="w"> </span><span class="c1">// Solo disponible dentro de ForEach</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="ejemplo-completo-listar-los-items-de-la-compra">Ejemplo Completo: Listar los Items de la Compra<a class="headerlink" href="#ejemplo-completo-listar-los-items-de-la-compra" title="Permanent link">&para;</a></h3>
+<p>Vamos a integrar todo lo aprendido hasta ahora en la sesión para que la <code>ListaCompraView</code> muestre el campo de entrada y la lista de productos debajo.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">import</span><span class="w"> </span><span class="nc">SwiftUI</span>
+<span class="kd">import</span><span class="w"> </span><span class="nc">Observation</span>
+
+<span class="c1">// 1. Modelo Identificable</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">Item</span><span class="p">:</span><span class="w"> </span><span class="n">Identifiable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">nombre</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="n">Observable</span><span class="w"> </span>
+<span class="kd">class</span><span class="w"> </span><span class="nc">ListaModel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">items</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">Item</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">addItem</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">Item</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="n">nombre</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nf">deleteItem</span><span class="p">(</span><span class="n">at</span><span class="w"> </span><span class="n">offsets</span><span class="p">:</span><span class="w"> </span><span class="n">IndexSet</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">atOffsets</span><span class="p">:</span><span class="w"> </span><span class="n">offsets</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 2. Vista Principal</span>
+<span class="kd">struct</span><span class="w"> </span><span class="nc">ListaCompraView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ListaModel</span><span class="p">()</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">nuevoItem</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">VStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Lista de la compra&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">largeTitle</span><span class="p">)</span>
+
+<span class="w">                </span><span class="c1">// Entrada de datos</span>
+<span class="w">                </span><span class="n">HStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">TextField</span><span class="p">(</span><span class="s">&quot;Nuevo producto&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">nuevoItem</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Añadir&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">nuevoItem</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">model</span><span class="p">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="n">nuevoItem</span><span class="p">)</span>
+<span class="w">                            </span><span class="n">nuevoItem</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="p">.</span><span class="n">padding</span><span class="p">()</span>
+
+<span class="w">                </span><span class="c1">// Listado</span>
+<span class="w">                </span><span class="n">List</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">ForEach</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span>
+<span class="w">                        </span><span class="n">Text</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">nombre</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">onDelete</span><span class="p">(</span><span class="n">perform</span><span class="p">:</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="n">deleteItem</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="3-navegacion-con-navigationstack">3. Navegación con <code>NavigationStack</code><a class="headerlink" href="#3-navegacion-con-navigationstack" title="Permanent link">&para;</a></h2>
+<p>A partir de iOS 16, la navegación en SwiftUI se gestiona mediante el componente <strong><code>NavigationStack</code></strong>. Este componente actúa como contenedor y permite gestionar una "pila" de vistas. Es como el "sucesor espiritual" del <code>UINavigationController</code> que ya vimos en UIKit.</p>
+<p>Para implementar navegación, necesitamos tres elementos:</p>
+<ol>
+<li><strong><code>NavigationStack</code></strong>: El contenedor principal (solo debe haber uno en la raíz de nuestra jerarquía).</li>
+<li><strong><code>NavigationLink</code></strong>: El componente que actúa como "enlace" para disparar la navegación. Solo sabe que la vista destino recibirá un dato determinado, pero no sabe qué vista será.</li>
+<li><strong><code>.navigationDestination</code></strong>: El modificador que decide qué vista mostrar según el tipo de dato que recibe.</li>
+</ol>
+<p>Veamos un ejemplo sencillo en el que tenemos una vista "Principal" que nos permite navegar a una vista "Detalle", pasándole un dato, en este caso un String que la vista Detalle debe mostrar a modo de saludo:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">VistaPrincipal</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NavigationStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">VStack</span><span class="p">(</span><span class="n">spacing</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 1. El botón lanza un String concreto</span>
+<span class="w">                </span><span class="n">NavigationLink</span><span class="p">(</span><span class="s">&quot;Enviar saludo formal&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hola, ¿cómo está usted?&quot;</span><span class="p">)</span>
+
+<span class="w">                </span><span class="c1">// 2. Este lanza otro String diferente</span>
+<span class="w">                </span><span class="n">NavigationLink</span><span class="p">(</span><span class="s">&quot;Enviar saludo informal&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;¡Qué pasa, bro!&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">.</span><span class="n">navigationTitle</span><span class="p">(</span><span class="s">&quot;Inicio&quot;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c1">// 3. El &quot;mapeador&quot;: Si recibes un String, abre VistaDetalle</span>
+<span class="w">            </span><span class="p">.</span><span class="n">navigationDestination</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">textoRecibido</span><span class="w"> </span><span class="k">in</span>
+<span class="w">                </span><span class="n">VistaDetalle</span><span class="p">(</span><span class="n">mensaje</span><span class="p">:</span><span class="w"> </span><span class="n">textoRecibido</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span><span class="w"> </span><span class="nc">VistaDetalle</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nv">mensaje</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="w"> </span><span class="c1">// El dato que recibe</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Text</span><span class="p">(</span><span class="n">mensaje</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">largeTitle</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">navigationTitle</span><span class="p">(</span><span class="s">&quot;Detalle&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Podemos tener varios <code>NavigationDestination</code>, que se dispararán según el tipo de dato enviado por <code>NavigationLink</code>. Por ejemplo podría haber otro <em>link</em> que enviara un objeto y otro <em>destination</em> que lo capturara y llevara a una vista distinta a la vista Detalle.</p>
+<p>Fíjate también en el <code>Navigation Title</code> que es la forma correcta de poner títulos a las vistas dentro de un navigation stack, no lo hagas con un <code>Text</code> o similar.</p>
+<h3 id="ejemplo-mas-complejo-navegando-al-detalle-de-un-producto">Ejemplo más complejo: Navegando al detalle de un producto<a class="headerlink" href="#ejemplo-mas-complejo-navegando-al-detalle-de-un-producto" title="Permanent link">&para;</a></h3>
+<p>En nuestra lista de la compra, queremos que al pulsar sobre un producto se abra una pantalla nueva donde podamos ver (y quizás editar) el nombre de ese item.</p>
+<h4 id="1-creacion-de-la-vista-de-detalle">1. Creación de la vista de detalle<a class="headerlink" href="#1-creacion-de-la-vista-de-detalle" title="Permanent link">&para;</a></h4>
+<p>Primero definimos la vista de destino. Como queremos editar el modelo, usaremos <code>@Binding</code>. Fijáos en que usamos <code>@Binding</code> porque <code>Item</code> es un struct, si fuera una clase tendríamos que hacerla <code>@Observable</code> y usar <code>@Bindable</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">DetalleItemView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Binding</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">item</span><span class="p">:</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="c1">// Recibimos el item para editarlo</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Form</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">TextField</span><span class="p">(</span><span class="s">&quot;Nombre del producto&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">item</span><span class="p">.</span><span class="n">nombre</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">.</span><span class="n">navigationTitle</span><span class="p">(</span><span class="s">&quot;Editar Producto&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="2-integracion-de-la-navegacion-en-la-lista">2. Integración de la navegación en la lista<a class="headerlink" href="#2-integracion-de-la-navegacion-en-la-lista" title="Permanent link">&para;</a></h4>
+<p>Ahora actualizamos la vista principal. En lugar de mostrar solo el nombre del item, envolvemos cada fila en un <code>NavigationLink</code>. Le pasamos el id del item, para luego poder identificarlo en el <code>navigationDestination</code>.</p>
+<p>Al recibir el id en el <em>destination</em> aprovechamos para buscar el item en sí y pasarle un <em>binding</em> a la vista destino, no podemos pasarle simplemente el objeto ya que ésta quiere editarlo.</p>
+<div class="admonition warning">
+<p class="admonition-title">Cambio en el código del struct Item</p>
+<p>Para hacer editable el nombre del <code>Item</code> necesitamos cambiar su definición con <code>let</code> por una con <code>var</code>: <code>var nombre : String</code>.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ListaCompraView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ListaModel</span><span class="p">()</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NavigationStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Lista de la compra&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">largeTitle</span><span class="p">)</span>
+
+<span class="w">            </span><span class="c1">// Entrada de datos</span>
+<span class="w">            </span><span class="n">HStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">TextField</span><span class="p">(</span><span class="s">&quot;Nuevo producto&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">nuevoItem</span><span class="p">)</span>
+<span class="w">                </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Añadir&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">nuevoItem</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">model</span><span class="p">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="n">nuevoItem</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">nuevoItem</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">.</span><span class="n">padding</span><span class="p">()</span>
+
+<span class="w">            </span><span class="c1">// Listado</span>
+<span class="w">            </span><span class="n">List</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">ForEach</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span>
+<span class="w">                    </span><span class="c1">// mostramos el nombre del item y asociamos el link a su id</span>
+<span class="w">                    </span><span class="n">NavigationLink</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">nombre</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="n">item</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">.</span><span class="n">navigationTitle</span><span class="p">(</span><span class="s">&quot;Lista Compra&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="c1">// Definimos el destino para el tipo de dato &quot;Item&quot;</span>
+<span class="w">            </span><span class="p">.</span><span class="n">navigationDestination</span><span class="p">(</span><span class="k">for</span><span class="p">:</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="kc">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">in</span>
+<span class="w">                </span><span class="c1">// Buscamos la &quot;fuente de la verdad&quot; en el modelo usando el ID</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nv">index</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">.</span><span class="n">firstIndex</span><span class="p">(</span><span class="k">where</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">$0</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">//Pasamos el binding, para que la vista detalle pueda editar el item</span>
+<span class="w">                    </span><span class="n">DetalleItemView</span><span class="p">(</span><span class="n">item</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Producto no encontrado&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">¿No sería más fácil pasarle al <em>destination</em> el índice en el array en vez de el id?</p>
+<p>En cierta medida sí, porque nos ahorraríamos buscar el item con <code>firstIndex</code>, pero solo es una línea de código, y en una app real podría ser que la lista se actualizara en <em>background</em> por lo que los índices podrian cambiar. Es cierto que es mucha coincidencia que se actualice la lista justo cuando le damos con el dedo para ver los detalles, pero en general es mucho más seguro identificar los items en una lista con un id que con la posición, y de cualquier modo SwiftUI nos exige un id para cada elemento de la lista, así que no representa demasiado esfuerzo adicional.</p>
+</div>
+<h2 id="4-modales-y-hojas-sheet">4. Modales y Hojas (<code>.sheet</code>)<a class="headerlink" href="#4-modales-y-hojas-sheet" title="Permanent link">&para;</a></h2>
+<p>No siempre queremos una pila de vistas en la navegación. Para acciones secundarias como crear un nuevo elemento, lo habitual en iOS es usar una <strong>hoja modal</strong>.</p>
+<p>Aquí tenemos un ejemplo en el que pasamos la creación de items a un modal, en lugar de hacerlo en la misma pantalla que mostramos la lista. Primero tenemos que modificar la vista principal:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ListaCompraView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ListaModel</span><span class="p">()</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">mostrandoCreacion</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NavigationStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">List</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">items</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span>
+<span class="w">                </span><span class="n">Text</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">nombre</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">.</span><span class="n">navigationTitle</span><span class="p">(</span><span class="s">&quot;Lista de la Compra&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">toolbar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Button</span><span class="p">(</span><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">mostrandoCreacion</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">Image</span><span class="p">(</span><span class="n">systemName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;plus&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">// Presentación modal</span>
+<span class="w">            </span><span class="p">.</span><span class="n">sheet</span><span class="p">(</span><span class="n">isPresented</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">mostrandoCreacion</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">NuevoItemView</span><span class="p">(</span><span class="n">model</span><span class="p">:</span><span class="w"> </span><span class="n">model</span><span class="p">)</span><span class="w"> </span><span class="c1">// Vista para crear el item</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Fijáos cómo podemos controlar la aparición de una modal con un estado que depende de una variable booleana, en este caso <code>mostrandoCreacion</code>, pasándole la variable a <code>.sheet</code> en el parámetro <code>isPresented:</code>. Fijáos también en que pasamos un <em>binding</em> y no el valor de la variable, porque la vista modal cambiará automáticamente el valor a <code>false</code> para cerrarse, así que necesita poder modificar la variable.</p>
+<p>Para que quede mejor hemos metido el botón de crear nuevo item en la <em>toolbar</em> del <em>navigation stack</em>. Creamos la <em>toolbar</em> con el método <code>.toolbar</code> como modificador de la vista dentro del <em>stack</em>, en este caso, <code>List</code>, y le añadimos un botón para disparar la acción de mostrar el modal, que será simplemente poner la variable booleana a true.</p>
+<p>La vista para crear item sería algo así:</p>
+<p><div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">NuevoItemView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Referencia al modelo para poder insertar el nuevo elemento</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="p">:</span><span class="w"> </span><span class="n">ListaModel</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// Estado local: el usuario escribe aquí temporalmente</span>
+<span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">nombreNuevo</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+
+<span class="w">    </span><span class="c1">// Acción para cerrar el modal (equivalente a dismiss en UIKit)</span>
+<span class="w">    </span><span class="p">@</span><span class="n">Environment</span><span class="p">(</span><span class="err">\</span><span class="p">.</span><span class="n">dismiss</span><span class="p">)</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">dismiss</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">NavigationStack</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Form</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">TextField</span><span class="p">(</span><span class="s">&quot;Nombre del producto&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">nombreNuevo</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="p">.</span><span class="n">navigationTitle</span><span class="p">(</span><span class="s">&quot;Nuevo Producto&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="n">toolbar</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Botón de cancelación (izquierda por defecto en iOS)</span>
+<span class="w">                </span><span class="n">ToolbarItem</span><span class="p">(</span><span class="n">placement</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">cancellationAction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Cancelar&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">dismiss</span><span class="p">()</span><span class="w"> </span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="c1">// Botón de confirmación (derecha por defecto en iOS)</span>
+<span class="w">                </span><span class="n">ToolbarItem</span><span class="p">(</span><span class="n">placement</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">confirmationAction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">Button</span><span class="p">(</span><span class="s">&quot;Añadir&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">nombreNuevo</span><span class="p">.</span><span class="bp">isEmpty</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">model</span><span class="p">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="n">nombreNuevo</span><span class="p">)</span>
+<span class="w">                            </span><span class="n">dismiss</span><span class="p">()</span><span class="w"> </span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+Fijáos en que el <code>dismiss</code> para cerrar la vista lo obtenemos del <em>environment</em> de SwiftUI y que la invocación a <em>dismiss</em> pone a <code>false</code> la variable booleana que se asoció al <em>sheet</em> modal, por eso le tuvimos que pasar un <em>binding</em>, como ya discutimos hace un momento.</p>
+<p>Fijáos también en que esta vista recibe el modelo <strong>entero</strong>, que es una clase <code>@Observable</code>. Al ser una clase se pasa por referencia, y al llamar a un método que cambia algo dentro de la clase observable automáticamente SwiftUI detecta los cambios. Por eso no es necesario pasar un <em>binding</em>. Podríamos haber pasado un <em>binding</em> a un nuevo item, pero complicaría el caso en el que al final no lo creamos y pulsamos sobre <code>cancelar</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Vista Modal vs pantalla completa</p>
+<p><code>.sheet</code> no es la única opción. Existe <code>.fullScreenCover</code> para casos donde quieras tapar toda la pantalla (típico en cámaras o editores de fotos), lo cual es el equivalente al <code>modalPresentationStyle = .fullScreen</code> en UIKit.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
