@@ -980,7 +980,7 @@
 <span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nv">new</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Item</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span>
 <span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
 
-<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;🛒 Lista actual:&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;Lista actual:&quot;</span><span class="p">)</span>
 <span class="w">        </span><span class="n">items</span><span class="p">.</span><span class="n">forEach</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">print</span><span class="p">(</span><span class="s">&quot;- </span><span class="si">\(</span><span class="nv">$0</span><span class="p">.</span><span class="n">nombre</span><span class="si">)</span><span class="s">&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -1248,12 +1248,10 @@ Podemos tener varios <code>NavigationDestination</code>, que se dispararán seg�
 </div>
 <div class="highlight"><pre><span></span><code><span class="kd">struct</span><span class="w"> </span><span class="nc">ListaCompraView</span><span class="p">:</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ListaModel</span><span class="p">()</span>
+<span class="w">     </span><span class="p">@</span><span class="n">State</span><span class="w"> </span><span class="kd">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nv">nuevoItem</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
 
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nv">body</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">NavigationStack</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">Text</span><span class="p">(</span><span class="s">&quot;Lista de la compra&quot;</span><span class="p">)</span>
-<span class="w">                    </span><span class="p">.</span><span class="n">font</span><span class="p">(.</span><span class="n">largeTitle</span><span class="p">)</span>
-
 <span class="w">            </span><span class="c1">// Entrada de datos</span>
 <span class="w">            </span><span class="n">HStack</span><span class="w"> </span><span class="p">{</span>
 <span class="w">                </span><span class="n">TextField</span><span class="p">(</span><span class="s">&quot;Nuevo producto&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">nuevoItem</span><span class="p">)</span>
