@@ -79,7 +79,7 @@ class ListaModel {
         let new = Item(nombre: nombre)
         items.append(new)
 
-        print("🛒 Lista actual:")
+        print("Lista actual:")
         items.forEach { print("- \($0.nombre)") }
     }
 }
@@ -423,12 +423,10 @@ Al recibir el id en el *destination* aprovechamos para buscar el item en sí y p
 ```swift
 struct ListaCompraView: View {
     @State private var model = ListaModel()
-    
+     @State private var nuevoItem = ""
+     
     var body: some View {
         NavigationStack {
-            Text("Lista de la compra")
-                    .font(.largeTitle)
-
             // Entrada de datos
             HStack {
                 TextField("Nuevo producto", text: $nuevoItem)
